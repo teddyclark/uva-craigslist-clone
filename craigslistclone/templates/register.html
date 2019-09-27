@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Register</title>
+</head>
+
+<body>
+  <div id='error'>
+    {% if messages %} {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %} {% endif %}
+  </div>
+  <h1>Register</h1>
+  <div class="register">
+    <form action="{% url 'register' %}" method="POST" role="form">
+      {% csrf_token %} {% for field in form.visible_fields %}
+      <div class="form-group{% if field.errors %} has-error{% endif %}">
+        <label for="{{ field.label }}">{{ field.label }}</label>
+        {{ field }} {% for error in field.errors %}
+        <label class="control-label">{{ error }}</label>
+        {% endfor %}
+      </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary btn-lg">Create an account</button>
+    </form>
+  </div>
+</body>
+
+</html>
