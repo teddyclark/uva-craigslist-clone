@@ -63,3 +63,16 @@ class User(models.Model):
     username = models.CharField(max_length=50, unique=True)
     hashed_pw = models.BinaryField(max_length=255)
     objects = UserManager()
+
+class Post(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(max_length=500)
+    condition = models.Field.choices = [
+        ('New'), ('Good'), ('Moderate'), ('Poor'),
+    ]
+    # images = models.ImageField
+    price = models.DecimalField(max_digits=4, decimal_places=2) 
+    date = models.DateField(auto_now=True)
+    user = User.username
+
+

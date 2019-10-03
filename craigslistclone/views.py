@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib import messages
 from.models import User
+from django.views import generic
 
 # User login/logout
 
@@ -52,3 +53,6 @@ def logout(request):
 @is_login
 def home(request):
     return render(request, 'home.html')
+
+#class PostView(generic.ListView):
+
