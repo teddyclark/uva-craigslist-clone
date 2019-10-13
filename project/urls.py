@@ -23,11 +23,8 @@ from django.contrib.auth import logout
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    
     path('admin/', admin.site.urls),
     path('', include('craigslistclone.urls')),
-
-    path('', include('social_django.urls', namespace='social')),
-    path('logout/', logout, {'template_name': settings.LOGOUT_REDIRECT_URL},
-    name='logout'),
 
 ]
