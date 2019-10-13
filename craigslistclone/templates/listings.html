@@ -1,0 +1,22 @@
+{% block content %}
+    <h2>Listings</h2>
+
+    <table class="table">
+        <thread>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Images</th>
+            </tr>
+        </thread>
+        <tbody>
+            {% for listing in listings %}
+            <tr>
+                <td> {{ listing.title }} </td>
+                <td> {{ listing.description }} </td>
+                <td> {{ listing.image }} </td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}
