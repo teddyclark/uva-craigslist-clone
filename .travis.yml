@@ -1,0 +1,15 @@
+language: python
+python:
+- '3.6'
+install:
+- pip install -r requirements-travis.txt
+script:
+- python manage.py test
+deploy:
+  provider: heroku
+  api_key:
+    secure: UPxlSeS+5oLFyULmDza16uFEvSv97zvUy2H7ZyrBGv/STVnG+ItK6iWiHaexgDlo3iFMsj2J+1RFMiMHP6gr3ld5fKRHL/3IRZ+je8n4pSLUE/5YMMkRyFumMtJK2yUtyIsRXlJNkk5DPis1KLwymUdOvq4J9uAGtdN3bvKsIbfaoUkogLcj3X1MZEgVMt3ci0lb5CB0s8Shsy9Yysxy+n3muYUqZoQxGSIzIQ4c1K7DdwCh4Jjt424BPRBxpxscG82Ayle/6bJPkiJVxS5Q6+r6xlcFpwexLcWAm2MSDG6y/kc169vR1gUe5xqdZ/shHtEV7GTdH8pJ0pI+yROMRxhkAOf/7FY/Q5MTLXLkNYIVbkOtZeq09i//1JnpVsrNfgdEdkwYsMWCYJYHZUsde8yttcS+Y17mSVwnJQv2wboDadUk9eRXmcPb1TsKVX9FPyR1YHd4YfW3mvr/J+vjzdLUEmmtwjDUShHekMMrwXs9LpvdGz0keF8flkWvnhTJYCiNALcKKT6YFEn0vr8rESbJqaD3Bwy1erxqUtYTplXpRoPwl6/EyYwFRu2Nmp5GFU955qg5V/IVHYpUAlIASB7eTxd37qZiTj17lSJLeA/1m/gLdtAKw/lb2DKrHYRWdQIfWFX4NIvv8ibs5XwWle5FZT/lmAujAr1aPkH1deA=
+  app: project-101-loxodante
+  on:
+    repo: uva-cs3240-f19/project-101-loxodante
+    branch: bryce-dev
