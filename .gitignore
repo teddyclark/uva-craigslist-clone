@@ -1,10 +1,6 @@
 # VS Code settings
 settings.json
 
-# DB migrations
-
-
-
 # Compiled Python Files #
 *.pyc
 _pycache_/
