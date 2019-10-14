@@ -1,12 +1,11 @@
 from django.urls import reverse_lazy
 from .utils import is_login
-from .forms import RegisterForm
+from .forms import RegisterForm, ListingForm
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib import messages
-from.models import User
-from django.views import generic
-
+from.models import User, Listing
+from django.core.files.storage import FileSystemStorage
 # User login/logout
 
 
@@ -54,5 +53,33 @@ def logout(request):
 def home(request):
     return render(request, 'home.html')
 
-#class PostView(generic.ListView):
+
+# User upload images
+
+def upload(request):
+    context = {}
+    if request.method == 'POST':
+        uploaded_file = request.FILES['document']
+        fs = FileSystemStorage()
+        name = fs.save(uploaded_file.name, uploaded_file)
+        context['url'] = fs.url(name)
+    return render(request, 'upload.html')
+
+def listings(request):
+    listings = Listing.objects.all()
+    return render(request, 'listings.html', {
+        'listings' : listings
+    })
+
+def upload_listing(request):
+    if request.method == 'POST':
+        form = ListingForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('listings')
+    else:
+        form = ListingForm()
+    return render(request, 'upload_listing.html', {
+        'form': form
+    })
 

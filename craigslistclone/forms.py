@@ -1,5 +1,5 @@
 from django import forms
-from .models import User
+from .models import User, Listing
 from django.core.exceptions import ValidationError
 
 
@@ -36,3 +36,9 @@ class RegisterForm(forms.ModelForm):
             self._errors['password'] = self.error_class(
                 ['Passwords don\'t match'])
         return self.cleaned_data
+
+class ListingForm(forms.ModelForm):
+    class Meta:
+        model = Listing
+        fields = ('title', 'description', 'image')
+
