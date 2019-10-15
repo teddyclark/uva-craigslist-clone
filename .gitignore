@@ -1,6 +1,12 @@
 # VS Code settings
 settings.json
 
+# DB migrations
+migrations/
+
+#db.sqlite3
+db.sqlite3
+
 # Compiled Python Files #
 *.pyc
 _pycache_/
