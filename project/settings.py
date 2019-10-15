@@ -51,8 +51,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '752399507160-dq3f3g4qbu03g4lidlp7qotg1o386sjb.a
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'JQXNWbuuwHM5X_b_UVQi4JFk'
 
 # redirect urls for login/logout
-# LOGIN_URL = '/auth/login/google-oauth2/'
-LOGIN_URL = '/login/google-oauth2/'
+LOGIN_URL = '/auth/login/google-oauth2/'
+# LOGIN_URL = '/login/google-oauth2/'
 
 
 LOGIN_REDIRECT_URL = '/'
