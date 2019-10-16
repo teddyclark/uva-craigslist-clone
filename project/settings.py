@@ -38,7 +38,28 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# auth key and secret for google-oauth2 client
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '457263779733-9uc3p336ku3178bo4kvv5n9uufb8b5gr.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Xb9UoD9OiYdfN5c4N3f8goWV'
+
+# redirect urls for login/logout
+LOGIN_URL = '/auth/login/google-oauth2/'
+# LOGIN_URL = '/login/google-oauth2/'
+
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
