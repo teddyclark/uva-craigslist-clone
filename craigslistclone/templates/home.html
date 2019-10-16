@@ -4,7 +4,6 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'craigslistclone/style.css' %}">
 
-
 <html>
 
 <head>
@@ -20,6 +19,7 @@
 </head>
 
 
+<!-- Directly below is what is loaded when a user is authenticated - following the "else" is what is loaded when a user is not authenticated -->
 
 {% if user.is_authenticated %}
 
@@ -32,9 +32,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <!-- <li class="nav-item"><a class="nav-link" href="#">Home</a></li> -->
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link" href="#listings">View Listings</a></li>
                         <li class="nav-item"><a class="nav-link" href="#profile">Your Profile</a></li>
                     </ul>
@@ -61,11 +60,11 @@
     
     
     <!-- FOOTER -->
-    <div id="footer">
-        <div class="container">
-            <p class="text-muted"> &copy; 2019 LOXODONTA </p>
+    <footer id="footer" class="py-4 bg-info text-dark-50">
+        <div class="container text-center">
+            <small>Copyright &copy; UVA Craigslist </small>
         </div>
-    </div>
+    </footer>
 
 
 
@@ -94,23 +93,23 @@
 
     <!-- PAGE CONTENT -->
     <body>
-            {% csrf_token %}
-        
-            <div class="container">
-                <div class="page-header">
-                    <h4>UVA Craigslist</h4>
-                </div>
+        {% csrf_token %}
+    
+        <div class="container">
+            <div class="page-header">
+                <h4>UVA Craigslist</h4>
             </div>
+        </div>
 
-        </body>
+    </body>
         
         
         <!-- FOOTER -->
-        <div id="footer">
-            <div class="container">
-                <p class="text-muted"> &copy; 2019 LOXODONTA </p>
+        <footer id="footer" class="py-4 bg-info text-dark-50">
+            <div class="container text-center">
+                <small>Copyright &copy; UVA Craigslist </small>
             </div>
-        </div>
+        </footer>
 
 
 {% endif %}
