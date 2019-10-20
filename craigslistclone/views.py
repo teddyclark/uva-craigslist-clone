@@ -4,9 +4,9 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 # from django.contrib import messages
-# from.models import User
+from.models import User
 
-# User login/logout
+from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseForbidden
 
 
 def home(request):
@@ -14,6 +14,17 @@ def home(request):
         return render(request, 'home.html')
     else:
         return render(request, "home.html")
+
+
+
+
+
+
+# def newUser(self, request):
+#     if GoogleUserList.objects.filter(registered_user__startswith='bc6cd'):
+#         return HttpResponse("high five")
+#     else:
+#         return HttpResponse("rip")
 
 
 
