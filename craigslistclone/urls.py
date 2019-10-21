@@ -1,19 +1,18 @@
-from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import path, include
+from django.conf.urls import url
+
+
 from django.conf import settings
-from django.urls import path
+from django.contrib.auth import logout
+from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('upload/', views.upload, name='upload'),
-    path('register/',  views.register, name="register"),
-    path('login/',  views.login, name="login"),
-    path('logout/', views.logout, name="logout"),
+    path('', views.home, name='home'),
+    path('', include('social_django.urls', namespace='social')),
+
     path('listings/', views.listings, name="listings"),
     path('listings/upload', views.upload_listing, name="upload_image"),
     path('home/', views.home, name="home")
 ]
-
-# Serves media files during development
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

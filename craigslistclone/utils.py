@@ -1,3 +1,4 @@
+'''
 from django.core.exceptions import PermissionDenied
 from django.core import serializers
 from .models import User
@@ -11,3 +12,4 @@ def is_login(func):
             print(request.session.session_key)
             raise PermissionDenied
     return verify
+'''

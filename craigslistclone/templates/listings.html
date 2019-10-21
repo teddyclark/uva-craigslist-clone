@@ -5,7 +5,11 @@
         <thread>
             <tr>
                 <th>Title</th>
+                <th>Price</th>
                 <th>Description</th>
+                <th>Date</th>
+                <th>Condition</th>
+                <th>Category</th>
                 <th>Images</th>
             </tr>
         </thread>
@@ -13,7 +17,11 @@
             {% for listing in listings %}
             <tr>
                 <td> {{ listing.title }} </td>
+                <td> {{ listing.price }}</td>
                 <td> {{ listing.description }} </td>
+                <td> {{ listing.date}} </td>
+                <td> {{ listing.condition }}</td>
+                <td> {{ listing.category }}</td>
                 <td> {{ listing.image }} </td>
             </tr>
         </tbody>

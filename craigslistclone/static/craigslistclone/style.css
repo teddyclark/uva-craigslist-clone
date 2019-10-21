@@ -1,4 +1,4 @@
-.text-left {
+/* .text-left {
     text-align: left;
   }
   
@@ -8,44 +8,70 @@
   
   .text-center {
     text-align: center;
+  } */
+
+
+
+
+
+
+
+  html {
+    min-height: 100%;
+    position: relative;
   }
-
-
-
-
-
-
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  min-height: 100%;
-  position: relative;
-}
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
-#footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  background-color: #f5f5f5;
-}
-
-
-/* Custom page CSS
--------------------------------------------------- */
-/* Not required for template or sticky footer method. */
-
-body > .container {
-  padding: 60px 15px 0;
-}
-.footer-block { margin: 20px 0; }
-
-#footer > .container {
-  padding-right: 15px;
-  padding-left: 15px;
-}
+  body {
+  
+    margin-bottom: 60px;
+  }
+  #footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  
+  
+  body > .container {
+    padding: 60px 15px 0;
+  }
+  .footer-block { margin: 20px 0; }
+  
+  #footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  
+  
+  
+  
+  
+  html,
+  body {
+    height: 100%;
+  }
+  
+  #page-content {
+    flex: 1 0 auto;
+  }
+  
+  #sticky-footer {
+    flex-shrink: none;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+  }
+  
+  /* Other Classes for Page Styling */
+  
+  /* body {
+    background: #00aeff;
+    background: linear-gradient(to right, #00aeff, #33AEFF);
+  } */
+  
+  
+  
+  
+  /* link text color */

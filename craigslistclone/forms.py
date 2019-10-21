@@ -40,5 +40,5 @@ class RegisterForm(forms.ModelForm):
 class ListingForm(forms.ModelForm):
     class Meta:
         model = Listing
-        fields = ('title', 'description', 'image')
+        fields = ('title', 'description', 'condition', 'category', 'date', 'price',  'image')
 

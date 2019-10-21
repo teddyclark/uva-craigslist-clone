@@ -64,6 +64,14 @@ class User(models.Model):
     hashed_pw = models.BinaryField(max_length=255)
     objects = UserManager()
 
+
+# this model represents a list of users who have accounts with our site
+# class GoogleUserList(models.Model):
+#     registered_user = models.CharField(max_length=255)
+
+    # def __str__(self):
+    #     return self.registered_user
+
 class Listing(models.Model):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=500)

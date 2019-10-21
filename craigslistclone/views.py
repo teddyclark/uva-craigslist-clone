@@ -1,14 +1,22 @@
-from django.urls import reverse_lazy
-from .utils import is_login
-from .forms import RegisterForm, ListingForm
+#from django.urls import reverse_lazy
+#from .utils import is_login
+#from .forms import RegisterForm, ListingForm
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.contrib import messages
-from.models import User, Listing
+#from django.contrib import messages
+from .models import User, Listing
 from django.core.files.storage import FileSystemStorage
+
+from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseForbidden
+
 # User login/logout
 
-
+def home(request):
+    if request.user.is_authenticated:
+        return render(request, 'home.html')
+    else:
+        return render(request, "home.html")
+'''
 def index(request):
     if 'user' in request.session:
         return redirect(reverse('home'))
@@ -52,7 +60,7 @@ def logout(request):
 @is_login
 def home(request):
     return render(request, 'home.html')
-
+'''
 
 # User upload images
 
