@@ -67,6 +67,28 @@ class User(models.Model):
 class Listing(models.Model):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
+    condition = models.CharField(
+        max_length = 1,
+        choices = (
+            (0, 'Bad'),
+            (1, 'Poor'),
+            (2, 'Decent'),
+            (3, 'Good'),
+            (4, 'New'),
+        )
+    )
+    category = models.CharField(
+        max_length = 2,
+        choices = (
+            ('TB', 'Textbook'),
+            ('FN', 'Furniture'),
+            ('CL', 'Clothes'),
+            ('EL', 'Electronics'),
+            ('OT', 'Other'),
+        )
+    )
+    date = models.DateTimeField(auto_now = True)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
     image = models.ImageField(upload_to='listings/images/')
 
     def __str__(self):
