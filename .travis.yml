@@ -1,14 +1,14 @@
-# language: python
-# python:
-# - '3.7'
-# install:
-# - pip install -r requirements-travis.txt
-# script:
-# - python manage.py test
-# deploy:
-#   provider: heroku
-#   api_key:
-#     secure: iYL6pnGE7ivxgqzFKRbwLcsZiPTzW7HeDV/bhgBLwilMvEyrrKqTyVy/VZg4fxuFAelUWVnNflcJcPH3XUMEEKuTZ86hhUZb4psdUWjb8zkUsFNKJwTxToF9KEYPHLklzVsdoJBOhL+qSUghZKEh6YefDRuU3iakCpTp3VNJl3w24zInN9APIwo3k/0ewYDCrCRS/vVhFMldFIOCKL6Ru2z5rdkpFuZPErI/+Ewd80X2PaG/LqsPqWHNJpXAxXx0k2inWCVquxN5jxMnfm/RSWllRlhVXcDy24T6TyI7jk5janXiOg6vw5TYXn+JdBS1AFsN1VciFBBEoxhGX/LV4T36014lYHbgrzNikxpeOCO046fLr096kf4Tfx/zpO3AseHcVRR6D897RWlzuo6t37pDAtH2ZSNtMMaV+gNVPhPAqQ2rjsYVfWOsQ/9hqjzfkZKRBbCxzTKeuxIUYRz6SeFffq8S1ZZhwuRgTT8Fl4F9I/9lMqvdRQ3KsfnOs8QnIjtbpir8LEPvHOiPQiMVB55hjU+9kHXfVRDYHNbTriQstFgZdycD8Rdr33I/NSkrhLhaynHGLI4QeyT4rLaZK+ZnzJiCLVsPC/L6KTwdH9//+clIT4cL6995N0JrZVTitLhH9NMpKTkl7IvqKP9WwgZ0Lrkoo2Z6jemg8yjMS6E=
-#   app: project-101-loxodante
-#   on:
-#     repo: uva-cs3240-f19/project-101-loxodante
+language: python
+python:
+- '3.7'
+install:
+- pip install -r requirements-travis.txt
+script:
+- python manage.py test
+deploy:
+  provider: heroku
+  api_key:
+    secure: iYL6pnGE7ivxgqzFKRbwLcsZiPTzW7HeDV/bhgBLwilMvEyrrKqTyVy/VZg4fxuFAelUWVnNflcJcPH3XUMEEKuTZ86hhUZb4psdUWjb8zkUsFNKJwTxToF9KEYPHLklzVsdoJBOhL+qSUghZKEh6YefDRuU3iakCpTp3VNJl3w24zInN9APIwo3k/0ewYDCrCRS/vVhFMldFIOCKL6Ru2z5rdkpFuZPErI/+Ewd80X2PaG/LqsPqWHNJpXAxXx0k2inWCVquxN5jxMnfm/RSWllRlhVXcDy24T6TyI7jk5janXiOg6vw5TYXn+JdBS1AFsN1VciFBBEoxhGX/LV4T36014lYHbgrzNikxpeOCO046fLr096kf4Tfx/zpO3AseHcVRR6D897RWlzuo6t37pDAtH2ZSNtMMaV+gNVPhPAqQ2rjsYVfWOsQ/9hqjzfkZKRBbCxzTKeuxIUYRz6SeFffq8S1ZZhwuRgTT8Fl4F9I/9lMqvdRQ3KsfnOs8QnIjtbpir8LEPvHOiPQiMVB55hjU+9kHXfVRDYHNbTriQstFgZdycD8Rdr33I/NSkrhLhaynHGLI4QeyT4rLaZK+ZnzJiCLVsPC/L6KTwdH9//+clIT4cL6995N0JrZVTitLhH9NMpKTkl7IvqKP9WwgZ0Lrkoo2Z6jemg8yjMS6E=
+  app: project-101-loxodante
+  on:
+    repo: uva-cs3240-f19/project-101-loxodante
