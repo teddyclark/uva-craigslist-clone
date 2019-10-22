@@ -25,7 +25,7 @@ SECRET_KEY = 'clc(8y^edm9re%m3^n&vugrl)9ka4vfl9@aa^_!_g(%lq!8)_z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['loxodante.herokuapp.com']
 
 
 # Application definition
