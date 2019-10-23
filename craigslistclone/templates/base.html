@@ -21,7 +21,7 @@
 
 <!-- Directly below is what is loaded when a user is authenticated - following the "else" is what is loaded when a user is not authenticated -->
 
-{% if user.is_authenticated %}
+<!-- if statement here -->
 
     <nav class="navbar navbar-expand-lg navbar-info bg-info">
         <div class="container">
@@ -69,9 +69,9 @@
 
 
 
-{% else %}
+<!-- else here -->
 
-    <nav class="navbar navbar-expand-lg navbar-info bg-info">
+    <!-- <nav class="navbar navbar-expand-lg navbar-info bg-info">
         <div class="container">
     
             <a class="navbar-brand">Loxodonta</a>
@@ -88,11 +88,11 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav> -->
 
 
     <!-- PAGE CONTENT -->
-    <body>
+    <!-- <body>
         {% csrf_token %}
     
         <div class="container">
@@ -101,19 +101,17 @@
             </div>
         </div>
 
-    </body>
+    </body> -->
         
         
         <!-- FOOTER -->
-        <footer id="footer" class="py-4 bg-info text-dark-50">
+        <!-- <footer id="footer" class="py-4 bg-info text-dark-50">
             <div class="container text-center">
                 <small>Copyright &copy; UVA Craigslist </small>
             </div>
-        </footer>
+        </footer> -->
 
-
-{% endif %}
-
+<!-- endif here -->
 
 
 </html>
