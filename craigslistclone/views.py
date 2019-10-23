@@ -15,7 +15,11 @@ def home(request):
     else:
         return render(request, 'login.html')
 
-
+def listing(request):
+    if request.user.is_authenticated:
+        return render(request, 'listing.html')
+    else:
+        return render(request, 'home.html')
 
 
 
