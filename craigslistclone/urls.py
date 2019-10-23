@@ -9,8 +9,7 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-    # path('', views.home, name='home'),
-    path('', views.home, name='login'),
+    path('', views.home, name='home'),
 
     path('', include('social_django.urls', namespace='social')),
     # path('logout/', logout, {'home': settings.LOGOUT_REDIRECT_URL}, name='logout'),
