@@ -78,11 +78,11 @@ class Listing(models.Model):
     condition = models.CharField(
         max_length = 1,
         choices = (
-            (0, 'Bad'),
-            (1, 'Poor'),
-            (2, 'Decent'),
-            (3, 'Good'),
-            (4, 'New'),
+            ('0', 'Bad'),
+            ('1', 'Poor'),
+            ('2', 'Decent'),
+            ('3', 'Good'),
+            ('4', 'New'),
         )
     )
     category = models.CharField(
