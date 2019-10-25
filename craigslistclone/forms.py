@@ -38,6 +38,51 @@ class RegisterForm(forms.ModelForm):
         return self.cleaned_data
 
 class ListingForm(forms.ModelForm):
+    title = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        max_length=100,
+        required=True,
+    )
+    description = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        max_length=500,
+        required=True,
+    )
+    condition = forms.ChoiceField(
+        choices = (
+            (0, 'Bad'),
+            (1, 'Poor'),
+            (2, 'Decent'),
+            (3, 'Good'),
+            (4, 'New'),
+        ),
+        required=True,
+    )
+    category = forms.ChoiceField(
+        choices = (
+            ('TB', 'Textbook'),
+            ('FN', 'Furniture'),
+            ('CL', 'Clothes'),
+            ('EL', 'Electronics'),
+            ('OT', 'Other'),
+        ),
+        required=True,
+    )
+    date = forms.DateTimeField(
+        widget=forms.SelectDateWidget(attrs=None),
+        auto_now = True,
+        required=True,
+    )
+    price = forms.DecimalField(
+        max_digits=6, 
+        decimal_places=2,
+        required=True,
+    )
+    image = forms.ImageField(
+        upload_to='listings/images/',
+        required=True,
+    )
+
     class Meta:
         model = Listing
         fields = ('title', 'description', 'condition', 'category', 'date', 'price',  'image')
