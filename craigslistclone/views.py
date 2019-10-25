@@ -93,7 +93,7 @@ def upload_listing(request):
         form = ListingForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('listings')
+            return HttpResponse("Hello")
     else:
         form = ListingForm()
     return render(request, 'upload_listing.html', {
