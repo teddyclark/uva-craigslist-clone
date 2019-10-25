@@ -4,21 +4,36 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 # from django.contrib import messages
-from.models import User
+from.models import User, GoogleUserList
 
-from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseForbidden
+from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseRedirect 
+
+# def home(request):
+#     if request.user.is_authenticated:
+#         return render(request, 'home.html')
+#     else:
+#         return render(request, 'login.html')
 
 
 def home(request):
     if request.user.is_authenticated:
-        return render(request, 'home.html')
+
+        if not GoogleUserList.objects.filter(registered_user=request.user.username).exists():
+            return render(request, 'create_profile.html')
+        else:
+            return render(request, 'home.html')
+    
     else:
         return render(request, 'login.html')
 
 
+# def go_to_home(request):
+#     return render(request, 'home.html')
 
 
-
+# def request_page(request):
+#     if(request.GET.get('mybtn')):
+#         return render(request, 'home.html')
 
 
 
