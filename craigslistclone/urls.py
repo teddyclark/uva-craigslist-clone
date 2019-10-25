@@ -11,8 +11,8 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('', include('social_django.urls', namespace='social')),
-
-    path('listings/', views.listings, name="listings"),
+    #path('listings/', views.listings, name="listings"),
+    path('', views.ListingView.as_view(), name='listings'),
     path('listings/upload', views.upload_listing, name="upload_image"),
     path('home/', views.home, name="home")
 ]

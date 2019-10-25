@@ -3,6 +3,8 @@
 #from .forms import RegisterForm, ListingForm
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.utils import timezone
+from django.views import generic
 #from django.contrib import messages
 from .models import User, Listing
 from .forms import ListingForm
@@ -63,6 +65,12 @@ def home(request):
     return render(request, 'home.html')
 '''
 
+class ListingView(generic.ListView):
+    model = Listing
+    template_name = 'listings.html'
+
+    def get_queryset(self):
+        return Listing.objects.filter(pub_date__lte=timezone.now())
 # User upload images
 
 def upload(request):
