@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 #from django.contrib import messages
 from .models import User, Listing
+from .forms import ListingForm
 from django.core.files.storage import FileSystemStorage
 
 from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseForbidden

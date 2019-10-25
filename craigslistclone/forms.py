@@ -68,22 +68,17 @@ class ListingForm(forms.ModelForm):
         ),
         required=True,
     )
-    date = forms.DateTimeField(
-        widget=forms.SelectDateWidget(attrs=None),
-        auto_now = True,
-        required=True,
-    )
     price = forms.DecimalField(
         max_digits=6, 
         decimal_places=2,
         required=True,
     )
     image = forms.ImageField(
-        upload_to='listings/images/',
+        #upload_to='listings/images/',
         required=True,
     )
 
     class Meta:
         model = Listing
-        fields = ('title', 'description', 'condition', 'category', 'date', 'price',  'image')
+        fields = ('title', 'description', 'condition', 'category', 'price', 'image')
 
