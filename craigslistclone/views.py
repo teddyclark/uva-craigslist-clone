@@ -20,8 +20,12 @@ def listing(request):
         return render(request, 'listing.html')
     else:
         return render(request, 'home.html')
-
-
+#we probably want to comment out home.html so welcome can be linked back to login
+def welcome(request):
+    if request.user.is_authenticated:
+        return render(request, 'welcome.html')
+    else:
+        return render(request, 'home.html')
 
 
 
