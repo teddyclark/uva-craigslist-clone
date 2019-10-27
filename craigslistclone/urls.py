@@ -19,4 +19,5 @@ urlpatterns = [
     # path('logout/', views.logout, name="logout"),
     # path('home/', views.home, name="home")
     path('listing/', views.listing, name = 'listing'),
+    path('welcome/', views.welcome, name = 'welcome'),
 ]
