@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel ="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+    <ol class="breadcrumb">
+        <li class="active">Create Event</li>
+    </ol>
+      <form enctype="multipart/form-data" action="{% url 'createListing' %}" id="isting-form" method="post" role="form">
+        {% csrf_token %}
+        {{ form.status }}
+        {% for field in form.visible_fields %}
+          <div class="form-group{% if field.errors %} has-error{% endif %}">
+            <label for="{{ field.label }}" class="control-label">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+              <span class="help-block">{{ field.help_text }}</span>
+            {% endif %}
+            {% for error in field.errors %}
+              <label class="control-label">{{ error }}</label>
+            {% endfor %}
+          </div>
+        {% endfor %}
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary create">Create</button>
+          <a href="{% url 'home' %}" class="btn btn-default">'Cancel'</a>
+        </div>
+      </form>
+    
+</body>
+
+</html>

@@ -10,7 +10,7 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-
+    path('createListing/', views.CreateListing.as_view(), name="createListing"),
     path('', include('social_django.urls', namespace='social')),
     # path('logout/', logout, {'home': settings.LOGOUT_REDIRECT_URL}, name='logout'),
 

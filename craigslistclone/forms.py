@@ -1,6 +1,20 @@
-# from django import forms
-# from .models import User
-# from django.core.exceptions import ValidationError
+from django import forms
+from .models import User, Listing
+from django.core.exceptions import ValidationError
+
+
+class ListingForm(forms.ModelForm):
+    name = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        max_length=255)
+    description = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'form-control'}),
+        max_length=3000)
+    image = forms.ImageField(required=False)
+
+    class Meta:
+        model = Listing
+        fields = ['name', 'description', 'image']
 
 
 # class RegisterForm(forms.ModelForm):
