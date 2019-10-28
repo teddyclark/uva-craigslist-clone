@@ -15,9 +15,9 @@ def home(request):
     else:
         return render(request, 'login.html')
 
-def listing(request):
+def tempListing(request):
     if request.user.is_authenticated:
-        return render(request, 'listing.html')
+        return render(request, 'tempList.html')
     else:
         return render(request, 'home.html')
 #we probably want to comment out home.html so welcome can be linked back to login

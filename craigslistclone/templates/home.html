@@ -1,122 +1,157 @@
-<!DOCTYPE html>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-{% load static %}
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-<link rel="stylesheet" type="text/css" href="{% static 'craigslistclone/style.css' %}">
-
-<html>
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
-    <title>Loxodonta</title>
-
-</head>
-
-
-<!-- Directly below is what is loaded when a user is authenticated - following the "else" is what is loaded when a user is not authenticated -->
-
-<!-- if statement here -->
-
-    <nav class="navbar navbar-expand-lg navbar-info bg-info">
+<body>
+    {% csrf_token %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-    
-            <a class="navbar-brand">Loxodonta</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#">Loxodante</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-                <div class="navbar-collapse">
-                    <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="#listings">View Listings</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#profile">Your Profile</a></li>
-                    </ul>
-        
-                </div>
-
-        </div>
-    </nav>
-
-    <!-- PAGE CONTENT -->
-    <body>
-        {% csrf_token %}
-    
-        <div class="container">
-            <div class="page-header">
-                <h4>UVA Craigslist</h4>
-            </div>
-        </div>
-    
-        <div class='container'>
-            <p>Logged in as {{ user.username }}</p>
-        </div>
-    </body>
-    
-    
-    <!-- FOOTER -->
-    <footer id="footer" class="py-4 bg-info text-dark-50">
-        <div class="container text-center">
-            <small>Copyright &copy; UVA Craigslist </small>
-        </div>
-    </footer>
-
-
-
-
-<!-- else here -->
-
-    <!-- <nav class="navbar navbar-expand-lg navbar-info bg-info">
-        <div class="container">
-    
-            <a class="navbar-brand">Loxodonta</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-    
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <ul class="nav navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'social:begin' 'google-oauth2' %}">Login with Netbadge</a></li>
-                    </ul>
+                <li class="nav-item active">
+                <a class="nav-link" href="#">Home</a>
+                <span class="sr-only">(current)</span>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Listing</a>
+                </li>
                 </ul>
             </div>
         </div>
-    </nav> -->
+    </nav>
 
-
-    <!-- PAGE CONTENT -->
-    <!-- <body>
-        {% csrf_token %}
     
-        <div class="container">
-            <div class="page-header">
-                <h4>UVA Craigslist</h4>
+    <header class="masthead text-white ">
+        <div class="overlay"></div>
+        <div class="container slider-top-text">
+            <div class="row">
+                <div class="col-md-12 text-center mt-5">
+                    <p></p>
+                </div>
             </div>
         </div>
+    </header>
 
-    </body> -->
-        
-        
-        <!-- FOOTER -->
-        <!-- <footer id="footer" class="py-4 bg-info text-dark-50">
-            <div class="container text-center">
-                <small>Copyright &copy; UVA Craigslist </small>
+    <section class="testimonials" id="gobottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3" >
+                    <div class="big-img">
+                        <img src="https://media1.giphy.com/media/w6BAklL8VSbFPcTUWw/giphy.gif" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="inner-section">
+                        <h3>Loxodante<span class="bg-main"></span></h3>
+                        <br>
+                        <p class="text-justify">Goodbye Craigslist and say Hello to the new online marketplace, Loxodante. </p>
+                        <p>Catered to the needs of UVA Students only, so login with your school email. </p>
+                    </div>
+                </div>
             </div>
-        </footer> -->
+        </div>
+    </section>
 
-<!-- endif here -->
+    
+    <section class="testimonials bg-light" id="marketplace">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <h3 class="text-center font-weight-bold"><span class="bg-main"></span> MARKET PLACE</h3>
+                    <p class=" text-center">Some of Our Featured Categories</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-lg-4 mt-4">
+                    <div class="card">
+                        <img class="card-img-top h-262" src="https://www.gap.com/Asset_Archive/GPWeb/content/0017/460/079/assets/VCN_PZ/women/04_G26802_HPCatVCN_tshirts.jpg">
+                        <div class="card-block">
+                            <h4 class="card-title">Clothes</h4>
+                        </div>
+                        <div class="card-footer">
+                            <small></small>
+                            <a href="#" class="pull-right">More Info</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4 mt-4">
+                    <div class="card">
+                        <img class="card-img-top h-262" src="https://www.qualtrics.com/m/assets/blog/wp-content/uploads/2018/08/shutterstock_1068141515.jpg">
+                        <div class="card-block">
+                            <h4 class="card-title">Books</h4>        
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="pull-right">More Info</a>
 
+                        </div>
+                    </div>
+                </div>
 
-</html>
+                <div class="col-sm-6 col-md-4 col-lg-4 mt-4">
+                    <div class="card">
+                        <img class="card-img-top h-262" src="https://ak1.ostkcdn.com/img/mxc/09102019_FALL_Furniture_a_PopCat_4_DiningRoom.jpg?imwidth=320&impolicy=medium">
+                        <div class="card-block">
+                            <h4 class="card-title ">Furniture</h4>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="pull-right">More Info</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <section class="testimonials text-center ">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <h3 class="text-center font-weight-bold">Who Are We?<span class="bg-main"></span> </h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-lg-6 mt-4">
+                    <div class="big-img-3">
+                        <img src="http://blog.humanesociety.org/wp-content/uploads/2019/02/ELEPHANTS-K6C5EP_401765-1-1220x813.jpg" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-6 mt-4">
+                    <div class="my-right-text">
 
+                        <p class="text-justify font-italic">Originally Team E, and since we aren't that creative we choose an animal that started with the letter E as our team name. (Triggered by HCI) 
+                            However, Elephants was a little too simple. Thus, Loxodante, the latin word for elephant, became the team name. </p>
 
+                        <p class="text-muted">CS 3240 Fall 2019</p>
+                        <p class="text-muted">Loxodante Team</p>
+                    </div>
+                </div>
 
-<!-- THIS FOLLOWING TAG MOVES SHIT OVER TO THE RIGHT OF THE NAVBAR: <ul class="navbar-nav ml-auto"> -->
+            </div>
+        </div>
+    </section>
+
+    <div class='container'>
+            <p>Logged in as {{ user.username }}</p>
+    </div>
+
+   <!-- FOOTER -->
+    <footer class="footer bg-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 text-center text-lg-left my-auto">
+                    <p></p>
+                    <p class="text-muted small mb-4 mb-lg-0">© Loxodante 2019. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    </body>
