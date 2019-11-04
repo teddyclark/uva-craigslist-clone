@@ -71,3 +71,21 @@ class GoogleUserList(models.Model):
 
     def __str__(self):
         return self.registered_user
+
+
+class ListingManager(models.Manager):
+
+    def placeholder(self, user_id):
+        user = User.objects.get(id=user_id)
+
+
+class Listing(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(max_length=1024)
+    image = models.ImageField(
+        upload_to='image_folder/', default='image_folder/no-img.jpg')
+    # need to figure out the key for User before we can implement creator
+    #creator = models.ForeignKey(User, on_delete=models.PROTECT) 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = ListingManager()
