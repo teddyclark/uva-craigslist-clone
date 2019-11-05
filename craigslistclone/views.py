@@ -15,14 +15,26 @@ from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpR
 #         return render(request, 'login.html')
 
 
+# def home(request):
+#     if request.user.is_authenticated:
+
+#         if not GoogleUserList.objects.filter(registered_user=request.user.username).exists():
+#             return render(request, 'create_profile.html')
+#         else:
+#             return render(request, 'home.html')
+    
+#     else:
+#         return render(request, 'login.html')
+
+
+
 def home(request):
     if request.user.is_authenticated:
-
         if not GoogleUserList.objects.filter(registered_user=request.user.username).exists():
-            return render(request, 'create_profile.html')
-        else:
-            return render(request, 'home.html')
-    
+            new_user = GoogleUserList(registered_user=request.user.username)
+            new_user.save()
+        return render(request, 'home.html')
+
     else:
         return render(request, 'login.html')
 
