@@ -44,51 +44,46 @@
     </nav>
 
 
-    <div class="d-flex flex-column justify-content-center">
-    <ol class="breadcrumb">
-        <li class="active">Create Event</li>
-    </ol>
-      <form enctype="multipart/form-data" action="{% url 'createListing' %}" id="isting-form" method="post" role="form">
-        {% csrf_token %}
-        {{ form.status }}
-        {% for field in form.visible_fields %}
-          <div class="form-group{% if field.errors %} has-error{% endif %}">
-            <label for="{{ field.label }}" class="control-label">{{ field.label }}</label>
-            {{ field }}
-            {% if field.help_text %}
-              <span class="help-block">{{ field.help_text }}</span>
-            {% endif %}
-            {% for error in field.errors %}
-              <label class="control-label">{{ error }}</label>
+
+
+<section>
+{% block content %}
+
+
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-3 left">
+            {% for listing in Listing %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{ listing.name }}</h2>
+
+                </div>
+            </div>
             {% endfor %}
-          </div>
-        {% endfor %}
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary create">Create</button>
-          <a href="{% url 'home' %}" class="btn btn-default">'Cancel'</a>
         </div>
-      </form>
     </div>
+</div> -->
 
 
+<div class="container">
+    <h1>All Listings:</h1>
+    {% if latest_post_list %}
+        <ul>
+            {% for listing in latest_post_list %}
+                <li><a> {{ listing.name }}, {{ listing.description }} </a></a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>No posts have been made</p>
+        {% endif %}
+</div>
 
 
-  <div class='container'>
-          <p>Logged in as {{ user.username }}</p>
-  </div>
+{%endblock%}
 
- <!-- FOOTER -->
-  <footer class="footer bg-dark">
-      <div class="container">
-          <div class="row">
-              <div class="col-lg-6 text-center text-lg-left my-auto">
-                  <p></p>
-                  <p class="text-muted small mb-4 mb-lg-0">© Loxodante 2019. All Rights Reserved.</p>
-              </div>
-          </div>
-      </div>
-  </footer>
-    
+</section>
+
 </body>
 
 </html>
