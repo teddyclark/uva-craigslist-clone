@@ -20,4 +20,5 @@ urlpatterns = [
     # path('home/', views.home, name="home")
     path('tempListing/', views.tempListing, name = 'tempListing'),
     path('welcome/', views.welcome, name = 'welcome'),
+    path('profile/', views.profile, name='profile')
 ]

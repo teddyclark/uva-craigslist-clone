@@ -26,6 +26,12 @@ def welcome(request):
     else:
         return render(request, 'home.html')
 
+def profile(request):
+    if request.user.is_authenticated:
+        return render(request, 'profile.html')
+    else:
+        return render(request, 'login.html')
+
 
 class CreateListing(CreateView):
     template_name = 'createListing.html'

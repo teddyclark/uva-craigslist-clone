@@ -7,30 +7,31 @@
 <body>
     {% csrf_token %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">Loxodante</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a>
-                <span class="sr-only">(current)</span>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'createListing' %}">Create Post</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Listing</a>
-                </li>
-                </ul>
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'home' %}">Loxodonta</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    <span class="sr-only">(current)</span>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'createListing' %}">Create Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Listings</a>
+                    </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    
 
     
     <header class="masthead text-white ">
@@ -54,7 +55,7 @@
                 </div>
                 <div class="col-md-8">
                     <div class="inner-section">
-                        <h3>Loxodante<span class="bg-main"></span></h3>
+                        <h3>Loxodonta<span class="bg-main"></span></h3>
                         <br>
                         <p class="text-justify">Goodbye Craigslist and say Hello to the new online marketplace, Loxodante. </p>
                         <p>Catered to the needs of UVA Students only, so login with your school email. </p>
@@ -143,7 +144,7 @@
     </section>
 
     <div class='container'>
-            <p>Logged in as {{ user.username }}</p>
+            <p>You are logged in as {{ user.username }}</p>
     </div>
 
    <!-- FOOTER -->
