@@ -30,5 +30,25 @@ class TestUserModel(unittest.TestCase):
     # exception test
     def test_last_name(self):
         user = User(lastName = "Doe")
-        self.assertFalse(user.lastName == "Day")    
+        self.assertFalse(user.lastName == "Day")  
+
+class ViewsTest(TestCase):
+    def setUp(self):
+        self.client = Client()
+        #testing with no user login
+    def testLogInPage(self):
+        response = self.client.get("/")
+        self.assertEqual(response.status_code, 200)
+    def testHomePage(self):
+        response = self.client.get("/home/")
+        self.assertEqual(response.status_code, 404)
+    def testProfilePage(self):
+        response = self.client.get("profile/")
+        self.assertEqual(response.status_code, 404)
+    def testCreatePostPage(self):
+        response = self.client.get("/createListing/")
+        self.assertEqual(response.status_code, 404)
+    def testListingsPage(self):
+        response = self.client.get("/listings/")
+        self.assertEqual(response.status_code, 404)
     
