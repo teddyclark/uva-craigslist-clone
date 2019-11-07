@@ -2,7 +2,7 @@ import unittest
 
 from django.test import TestCase, Client
 from django.urls import reverse, resolve
-from craigslistclone.models import User
+from craigslistclone.models import User, Listing
 from craigslistclone.views import home
 
 class TestStringMethods(unittest.TestCase):
@@ -31,4 +31,11 @@ class TestUserModel(unittest.TestCase):
     def test_last_name(self):
         user = User(lastName = "Doe")
         self.assertFalse(user.lastName == "Day")    
-    
+
+class TestListing(unittest.TestCase):
+    def test_listingname(self):
+        listing = Listing(name = 'testname')
+        self.assertEqual(listing.name, "testname")
+    def test_price(self):
+        listing = Listing(name = 'testname', price = 51.12)
+        self.assertEqual(listing.price, 51.12)
