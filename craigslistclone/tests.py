@@ -45,10 +45,10 @@ class ViewsTest(TestCase):
     def testProfilePage(self):
         response = self.client.get("profile/")
         self.assertEqual(response.status_code, 404)
-    def testCreatePostPage(self):
-        response = self.client.get("/createListing/")
-        self.assertEqual(response.status_code, 404)
-    def testListingsPage(self):
-        response = self.client.get("/listings/")
-        self.assertEqual(response.status_code, 404)
+    #def testCreatePostPage(self):
+    #    response = self.client.get("/createListing/")
+    #    self.assertEqual(response.status_code, 404)
+    #def testListingsPage(self):
+    #    response = self.client.get("/listings/")
+    #    self.assertEqual(response.status_code, 404)
     
