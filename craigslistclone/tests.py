@@ -2,7 +2,7 @@ import unittest
 
 from django.test import TestCase, Client
 from django.urls import reverse, resolve
-from craigslistclone.models import User
+from craigslistclone.models import User, GoogleUserList
 from craigslistclone.views import home
 
 class TestStringMethods(unittest.TestCase):
@@ -32,7 +32,7 @@ class TestUserModel(unittest.TestCase):
         user = User(lastName = "Doe")
         self.assertFalse(user.lastName == "Day")  
 
-class ViewsTest(TestCase):
+class ViewsTestNoUser(TestCase):
     def setUp(self):
         self.client = Client()
         #testing with no user login
@@ -45,10 +45,21 @@ class ViewsTest(TestCase):
     def testProfilePage(self):
         response = self.client.get("profile/")
         self.assertEqual(response.status_code, 404)
-    #def testCreatePostPage(self):
+    #def testCreatePostPage(self):                  #this is a bug
     #    response = self.client.get("/createListing/")
     #    self.assertEqual(response.status_code, 404)
     #def testListingsPage(self):
     #    response = self.client.get("/listings/")
     #    self.assertEqual(response.status_code, 404)
+
+class ViewsTest(TestCase):
+    def setUp(self):
+        #user = GoogleUserList(registered_user = "john")
+        self.client = Client()
+        #self.client.force_login(user)
+        self.client.force_login(User.objects.get_or_create(username='testuser')[0])
+    #def testLogInPage(self):
+    #    response = self.client.get("/")
+    #    self.assertEqual(response.status_code, 200)
+
     

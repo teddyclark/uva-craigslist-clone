@@ -8,6 +8,7 @@ from django.urls import reverse
 # from django.contrib import messages
 from.models import User, Listing, GoogleUserList
 from django.views import generic
+from django.contrib.auth import logout as auth_logout
 
 def home(request):
     if request.user.is_authenticated:
@@ -15,23 +16,15 @@ def home(request):
     else:
         return render(request, 'login.html')
 
-#def tempListing(request):
-#    if request.user.is_authenticated:
-#        return render(request, 'tempList.html')
-#    else:
-#        return render(request, 'home.html')
-#we probably want to comment out home.html so welcome can be linked back to login
-#def welcome(request):
-#    if request.user.is_authenticated:
-#        return render(request, 'welcome.html')
-#    else:
-#        return render(request, 'home.html')
-
 def profile(request):
     if request.user.is_authenticated:
         return render(request, 'profile.html')
     else:
         return render(request, 'login.html')
+
+def logout(request):
+    auth_logout(request)
+    return redirect('/')
 
 
 class CreateListing(CreateView):
@@ -46,7 +39,6 @@ class CreateListing(CreateView):
         # for now no user
         #form.instance.creator = creator
         return super(CreateListing, self).form_valid(form)
-
 
 """ This function just spits out all of the posts that have been made at the moment """
 class ListingView(generic.ListView):
