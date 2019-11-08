@@ -2,7 +2,7 @@ import unittest
 
 from django.test import TestCase, Client
 from django.urls import reverse, resolve
-from craigslistclone.models import User, GoogleUserList
+from craigslistclone.models import User, Listing
 from craigslistclone.views import home
 
 class TestStringMethods(unittest.TestCase):
