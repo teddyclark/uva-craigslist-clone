@@ -31,7 +31,7 @@ class TestUserModel(unittest.TestCase):
     def test_last_name(self):
         user = User(lastName = "Doe")
         self.assertFalse(user.lastName == "Day")    
-
+'''
 class TestListing(unittest.TestCase):
     def test_listingname(self):
         listing = Listing(name = 'testname')
@@ -39,3 +39,4 @@ class TestListing(unittest.TestCase):
     def test_price(self):
         listing = Listing(name = 'testname', price = 51.12)
         self.assertEqual(listing.price, 51.12)
+'''
