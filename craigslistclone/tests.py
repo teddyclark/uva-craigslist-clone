@@ -51,7 +51,7 @@ class ViewsTestNoUser(TestCase):
     #def testListingsPage(self):
     #    response = self.client.get("/listings/")
     #    self.assertEqual(response.status_code, 404)
-
+'''
 class ViewsTest(TestCase):
     def setUp(self):
         #user = GoogleUserList(registered_user = "john")
@@ -61,5 +61,15 @@ class ViewsTest(TestCase):
     #def testLogInPage(self):
     #    response = self.client.get("/")
     #    self.assertEqual(response.status_code, 200)
+'''
+
+class TestListing(unittest.TestCase):
+    def test_listingname(self):
+        listing = Listing(name = 'testname')
+        self.assertEqual(listing.name, "testname")
+    def test_price(self):
+        listing = Listing(name = 'testname', price = 51.12)
+        self.assertEqual(listing.price, 51.12)
+
 
     
