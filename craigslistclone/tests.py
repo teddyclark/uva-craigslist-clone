@@ -14,7 +14,7 @@ class TestStringMethods(unittest.TestCase):
         b = 4
         a = 1
         self.assertFalse(a == b)
-'''
+
 class TestUrl(unittest.TestCase):
     # tests root url resolves to home
     def test_root_url_resolves_to_home_view(self):
@@ -51,7 +51,7 @@ class ViewsTestNoUser(TestCase):
     #def testListingsPage(self):
     #    response = self.client.get("/listings/")
     #    self.assertEqual(response.status_code, 404)
-
+'''
 class ViewsTest(TestCase):
     def setUp(self):
         #user = GoogleUserList(registered_user = "john")
