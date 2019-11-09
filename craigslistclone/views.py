@@ -5,6 +5,7 @@ from django.views.generic import CreateView
 from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.db.models import Q
 # from django.contrib import messages
 from.models import User, Listing, GoogleUserList
 from django.views import generic
@@ -59,3 +60,18 @@ class ListingView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         return Listing.objects.all()
+
+def search(request):
+    if 'q' in request.GET:
+        querystring = request.GET.get('q').strip()
+        if len(querystring) == 0:
+            return redirect('/search/')
+
+        results = Listing.objects.filter(Q(name__icontains=querystring) | Q(description__icontains=querystring))
+        return render(request, 'results.html', {
+            'querystring': querystring,
+            'results': results,
+        })
+
+    else:
+        return render(request, 'results.html')

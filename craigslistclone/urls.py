@@ -23,4 +23,5 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('listings/', views.ListingView.as_view(), name='listings'),
     path('logout/', views.logout, name='logout'),
+    url(r'^search/$', views.search, name='search'),
 ]

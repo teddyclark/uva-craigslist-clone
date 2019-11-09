@@ -1,0 +1,102 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<head>
+  <title>Loxodanta</title>
+</head>
+
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    {% csrf_token %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">Loxodonta</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'createListing' %}">Create Post</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'listings' %}">Listings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    <form class="navbar-form navbar-left" role="search" action="{% url 'search' %}">
+        <div class="input-group" style="width:210px">
+            <input type="text" class="form-control" id="auto-search" name="q" placeholder="Search">
+            <span class="input-group-btn">
+            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+            </span>
+        </div>
+    </form>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-md-3">
+                <h1>Search Results</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row results">
+            <div class="col-md-10">
+                {% if results %}
+                    <ul>
+                        {% for listing in results %}
+                            <li><a> {{ listing.name }}, {{ listing.description }} </a></a></li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <h4 class="no-result">No listings found:(</h4>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+<section>
+{% block content %}
+
+{%endblock%}
+
+</section>
+
+
+
+<!-- FOOTER -->
+<footer class="footer bg-dark" style="position:absolute; width:100%; height: 2.5rem;bottom:0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 text-center text-lg-left my-auto">
+                <p class="text-muted mb-4 mb-lg-0">© Loxodante 2019. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+
+</html>
