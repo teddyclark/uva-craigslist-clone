@@ -9,6 +9,7 @@ from django.urls import reverse
 from.models import User, Listing, GoogleUserList
 from django.views import generic
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def home(request):
     if request.user.is_authenticated:
@@ -27,22 +28,21 @@ def logout(request):
     return redirect('/')
 
 
-class CreateListing(CreateView):
+class CreateListing(LoginRequiredMixin, CreateView):
+    login_url = '/'
     template_name = 'createListing.html'
     form_class = ListingForm
     success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         print("form valid")
-        # need to define Key to User 
-        #creator = User.objects.get(id=self.request.session['user'])
-        # for now no user
-        #form.instance.creator = creator
         return super(CreateListing, self).form_valid(form)
 
 """ This function just spits out all of the posts that have been made at the moment """
 class ListingView(generic.ListView):
+    login_url = '/'
     template_name = 'listings.html'
+    form_class = ListingForm
     context_object_name = 'latest_post_list'
 
     def get_queryset(self):
