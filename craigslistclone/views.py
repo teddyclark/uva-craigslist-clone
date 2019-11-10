@@ -40,7 +40,7 @@ class CreateListing(LoginRequiredMixin, CreateView):
     form_class = ListingForm
 
     # form_class = ListingForm
-    #success_url = reverse_lazy('home')
+    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         print("form valid")
