@@ -5,6 +5,7 @@ from django.views.generic import CreateView
 from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.db.models import Q
 # from django.contrib import messages
 from.models import User, Listing, GoogleUserList
 from django.views import generic
@@ -27,12 +28,19 @@ def logout(request):
     auth_logout(request)
     return redirect('/')
 
+# def createListingPage(request):
+#     if request.user.is_authenticated:
+#         return render(request, 'createListing.html')
+#     else:
+#         return render(request, 'login.html')
 
 class CreateListing(LoginRequiredMixin, CreateView):
     login_url = '/'
     template_name = 'createListing.html'
     form_class = ListingForm
-    success_url = reverse_lazy('home')
+
+    # form_class = ListingForm
+    #success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         print("form valid")
@@ -47,3 +55,18 @@ class ListingView(generic.ListView):
 
     def get_queryset(self):
         return Listing.objects.all()
+
+def search(request):
+    if 'q' in request.GET:
+        querystring = request.GET.get('q').strip()
+        if len(querystring) == 0:
+            return redirect('/search/')
+
+        results = Listing.objects.filter(Q(name__icontains=querystring) | Q(description__icontains=querystring))
+        return render(request, 'results.html', {
+            'querystring': querystring,
+            'results': results,
+        })
+
+    else:
+        return render(request, 'results.html')

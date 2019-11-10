@@ -6,11 +6,40 @@ from django.core.exceptions import ValidationError
 class ListingForm(forms.ModelForm):
     name = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control'}),
-        max_length=255)
+        max_length=255,
+        required=True)
     description = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'form-control'}),
         max_length=3000)
     image = forms.ImageField(required=False)
+    price = forms.DecimalField(
+        widget=forms.Textarea(attrs={'class': 'form-control'}),
+        max_digits=6, 
+        decimal_places=2,
+        required=True,
+    )
+    condition = forms.ChoiceField(
+        widget=forms.Textarea(attrs={'class': 'form-control'}),
+        choices = (
+            ('0', 'Bad'),
+            ('1', 'Poor'),
+            ('2', 'Decent'),
+            ('3', 'Good'),
+            ('4', 'New'),
+        ),
+        required=True,
+    )
+    category = forms.ChoiceField(
+        widget=forms.Textarea(attrs={'class': 'form-control'}),
+        choices = (
+            ('TB', 'Textbook'),
+            ('FN', 'Furniture'),
+            ('CL', 'Clothes'),
+            ('EL', 'Electronics'),
+            ('OT', 'Other'),
+        ),
+        required=True,
+    )
 
     ##new fields for create Post
     price = forms.DecimalField(

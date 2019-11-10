@@ -84,7 +84,6 @@ class Listing(models.Model):
     description = models.TextField(max_length=1024)
     image = models.ImageField(
         upload_to='image_folder/', default='image_folder/no-img.jpg')
-
     price = models.DecimalField(
         max_digits = 6, 
         decimal_places = 2,
