@@ -84,6 +84,34 @@ class Listing(models.Model):
     description = models.TextField(max_length=1024)
     image = models.ImageField(
         upload_to='image_folder/', default='image_folder/no-img.jpg')
+
+    price = models.DecimalField(
+        max_digits = 6, 
+        decimal_places = 2,
+        default = 0.00
+        )
+    condition = models.CharField(
+        max_length = 1,
+        choices = (
+            ('0', 'Bad'),
+            ('1', 'Poor'),
+            ('2', 'Decent'),
+            ('3', 'Good'),
+            ('4', 'New'),
+        ),
+        default = '2'
+    )
+    category = models.CharField(
+        max_length = 2,
+        choices = (
+            ('TB', 'Textbook'),
+            ('FN', 'Furniture'),
+            ('CL', 'Clothes'),
+            ('EL', 'Electronics'),
+            ('OT', 'Other'),
+        ),
+        default = 'OT'
+    )
     # need to figure out the key for User before we can implement creator
     #creator = models.ForeignKey(User, on_delete=models.PROTECT) 
     created_at = models.DateTimeField(auto_now_add=True)

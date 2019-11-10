@@ -74,7 +74,7 @@
     {% if latest_post_list %}
         <ul>
             {% for listing in latest_post_list %}
-                <li><a> {{ listing.name }}, {{ listing.description }} </a></a></li>
+                <li><a> {{ listing.name }}, {{ listing.description }}, {{listing.price}}, {{listing.condition}}, {{listing.category}}</a></a></li>
             {% endfor %}
         </ul>
         {% else %}
