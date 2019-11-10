@@ -74,6 +74,7 @@
     {% if latest_post_list %}
         <ul>
             {% for listing in latest_post_list %}
+                <img src="{{ listing.image.url }}" alt="{{ listing.name }}">
                 <li><a> {{ listing.name }}, {{ listing.description }}, {{listing.price}}, {{listing.condition}}, {{listing.category}}</a></a></li>
             {% endfor %}
         </ul>
