@@ -102,7 +102,7 @@
             <div class="row">
                 {% for listing in latest_post_list %}
                     <div class = "column">
-                        img src="{{ listing.image.url }}" alt="{{ listing.name }}">
+                        <img src="{{ listing.image.url }}" alt="{{ listing.name }}">
                         <h2> {{ listing.name }} -  ${{ listing.price }} </h2>
                         <h5> {{ listing.condition }}, {{ listing.category }} </h5>
                         <p>{{ listing.description }}</p>
