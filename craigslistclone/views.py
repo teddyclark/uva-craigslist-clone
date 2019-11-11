@@ -50,7 +50,8 @@ class CreateListing(LoginRequiredMixin, CreateView):
 class ListingView(generic.ListView):
     login_url = '/'
     template_name = 'listings.html'
-    form_class = ListingForm
+    model = Listing
+    #form_class = ListingForm
     context_object_name = 'latest_post_list'
 
     def get_queryset(self):
