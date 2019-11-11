@@ -1,4 +1,6 @@
 from django.db import models
+#from PIL import Image, ImageOps
+#rom io import StringIO
 import bcrypt
 
 
@@ -85,6 +87,13 @@ class Listing(models.Model):
     image = models.ImageField(
         upload_to='image_folder/', default='image_folder/no-img.jpg')
 
+    #cover = Image.open(image)
+    #if cover not in ("L", "RGB"):
+        #cover = cover.convert("RGB")
+
+    #cover = cover.thumbnail((500, 500), Image.ANTIALIAS)
+    #cover.save()
+
     price = models.DecimalField(
         max_digits = 6, 
         decimal_places = 2,
@@ -112,6 +121,7 @@ class Listing(models.Model):
         ),
         default = 'OT'
     )
+
     # need to figure out the key for User before we can implement creator
     #creator = models.ForeignKey(User, on_delete=models.PROTECT) 
     created_at = models.DateTimeField(auto_now_add=True)

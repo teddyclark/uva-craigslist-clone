@@ -68,16 +68,35 @@
     </div>
 </div> -->
 
+<style>
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
 
 <div class="container">
     <h1>All Listings:</h1>
     {% if latest_post_list %}
-        <ul>
+        <div class="row">
             {% for listing in latest_post_list %}
-                <img src="{{ listing.image.url }}" alt="{{ listing.name }}">
-                <li><a> {{ listing.name }}, {{ listing.description }}, {{listing.price}}, {{listing.condition}}, {{listing.category}}</a></a></li>
+                <div class="column">
+                    <img src="{{ listing.image.url }}" alt="{{ listing.name }}">
+                    <h2> {{ listing.name }} -  ${{ listing.price }} </h2>
+                    <h5> {{ listing.condition }}, {{ listing.category }} </h5>
+                    <p>{{ listing.description }}</p>
+                </div>
             {% endfor %}
-        </ul>
+        </div>
         {% else %}
             <p>No posts have been made</p>
         {% endif %}
@@ -90,7 +109,7 @@
 
 
 
-<!-- FOOTER -->
+<!-- FOOTER
 <footer class="footer bg-dark" style="position:absolute; width:100%; height: 2.5rem;bottom:0;">
     <div class="container">
         <div class="row">
@@ -99,7 +118,7 @@
             </div>
         </div>
     </div>
-</footer>
+</footer> --->
 
 </body>
 
