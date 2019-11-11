@@ -6,41 +6,47 @@ from django.core.exceptions import ValidationError
 class ListingForm(forms.ModelForm):
     name = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control'}),
-        max_length=255)
+        max_length=255,
+        required=True)
     description = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'form-control'}),
         max_length=3000)
     image = forms.ImageField(required=False)
-
-    ##new fields for create Post
     price = forms.DecimalField(
-        widget=forms.Textarea(attrs={'class': 'form-control'}),
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'step':0.25}),
         max_digits=6, 
         decimal_places=2,
         required=True,
     )
-    condition = forms.ChoiceField(
-        widget=forms.Textarea(attrs={'class': 'form-control'}),
-        choices = (
-            ('0', 'Bad'),
-            ('1', 'Poor'),
-            ('2', 'Decent'),
-            ('3', 'Good'),
-            ('4', 'New'),
-        ),
+    condition = forms.CharField(
+        label='What is the condition of the item?',
+        widget=forms.Select(
+            attrs={'class': 'form-control'},
+            choices = (
+                ('0', 'Bad'),
+                ('1', 'Poor'),
+                ('2', 'Decent'),
+                ('3', 'Good'),
+                ('4', 'New'),
+            )),
         required=True,
     )
-    category = forms.ChoiceField(
-        widget=forms.Textarea(attrs={'class': 'form-control'}),
-        choices = (
-            ('TB', 'Textbook'),
-            ('FN', 'Furniture'),
-            ('CL', 'Clothes'),
-            ('EL', 'Electronics'),
-            ('OT', 'Other'),
-        ),
+    category = forms.CharField(
+        label='What type of item is this?',
+        widget=forms.Select(attrs={'class': 'form-control'},
+            choices = (
+                ('TB', 'Textbook'),
+                ('FN', 'Furniture'),
+                ('CL', 'Clothes'),
+                ('EL', 'Electronics'),
+                ('OT', 'Other'),
+            )),
         required=True,
     )
+    class Meta:
+        model = Listing
+        #fields = ['name', 'description', 'image']
+        fields = ['name', 'description', 'image', 'price', 'condition', 'category']
     ##
 
     class Meta:
