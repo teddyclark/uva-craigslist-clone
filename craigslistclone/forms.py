@@ -11,7 +11,7 @@ class ListingForm(forms.ModelForm):
     description = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'form-control'}),
         max_length=3000)
-    image = forms.ImageField(required=True)
+    image = forms.ImageField(required=False)
     price = forms.DecimalField(
         widget=forms.NumberInput(attrs={'class': 'form-control', 'step':0.25}),
         max_digits=6, 

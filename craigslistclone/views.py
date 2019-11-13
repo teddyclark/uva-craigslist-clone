@@ -64,10 +64,10 @@ def createListing(request, template_name="createListing.html"):
                 instance.associated_username = user
                 instance.save()
                 return redirect('home')
-        else:
+        else:  
             form = ListingForm()
         return render(request, template_name, {'form': form})
-    else:
+    else:   
         return render(request, 'login.html')
 
 
