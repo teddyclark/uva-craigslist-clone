@@ -68,11 +68,14 @@
         <div class="row results">
             <div class="col-md-10">
                 {% if results %}
-                    <ul>
+                    <div class="row">
                         {% for listing in results %}
-                            <li><a> {{ listing.name }}, {{ listing.description }} </a></a></li>
+                            <div class = "column">
+                                <img src="{{ listing.image.url }}" alt="{{ listing.name }}">
+                                <h2> {{ listing.name }} -  ${{ listing.price }} </h2>
+                            </div>
                         {% endfor %}
-                    </ul>
+                    </div>
                 {% else %}
                     <h4 class="no-result">No listings found:(</h4>
                 {% endif %}
