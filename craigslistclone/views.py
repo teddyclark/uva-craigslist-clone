@@ -19,11 +19,7 @@ def home(request):
     else:
         return render(request, 'login.html')
 
-def profile(request):
-    if request.user.is_authenticated:
-        return render(request, 'profile.html')
-    else:
-        return render(request, 'login.html')
+
 
 def logout(request):
     auth_logout(request)
@@ -53,14 +49,11 @@ def logout(request):
 def createListing(request, template_name="createListing.html"):
     if request.user.is_authenticated:
         user = User.objects.get(username=request.user.username)
-        # staffprofile.user = user
-        print(" FUCKKKKKKKK", user)
         if request.method == 'POST':
             form = ListingForm(request.POST)
             print("USERNAME: ", request.user.username)
             if form.is_valid():
                 instance = form.save(commit=False)
-                # Listing.associated_username = request.user.username
                 instance.associated_username = user
                 instance.save()
                 return redirect('home')
@@ -72,16 +65,30 @@ def createListing(request, template_name="createListing.html"):
 
 
 
+class Profile(generic.ListView):
+    login_url = '/'
+    template_name = 'profile.html'
+    model = Listing
+    context_object_name = 'latest_post_list'
+
+    def get_queryset(self):
+        user = User.objects.get(username=self.request.user.username)
+        print("Username: ", user)
+        return Listing.objects.all().filter(associated_username=user)
+
+
+
 """ This function just spits out all of the posts that have been made at the moment """
 class ListingView(generic.ListView):
     login_url = '/'
     template_name = 'listings.html'
     model = Listing
-    #form_class = ListingForm
     context_object_name = 'latest_post_list'
 
     def get_queryset(self):
         return Listing.objects.all()
+
+
 
 def search(request):
     if 'q' in request.GET:

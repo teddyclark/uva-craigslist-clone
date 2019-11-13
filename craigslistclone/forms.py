@@ -45,7 +45,6 @@ class ListingForm(forms.ModelForm):
     )
     class Meta:
         model = Listing
-        #fields = ['name', 'description', 'image']
         fields = ['name', 'description', 'image', 'price', 'condition', 'category']
 
 
