@@ -60,7 +60,6 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h2 class="card-title">{{ listing.name }}</h2>
-
                 </div>
             </div>
             {% endfor %}
@@ -75,12 +74,51 @@
   width: 50%;
   padding: 10px;
 }
-
 /* Clear floats after the columns */
 .row:after {
   content: "";
   display: table;
   clear: both;
+}
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
 </style>
 
@@ -102,19 +140,27 @@
             <div class="row">
                 {% for listing in latest_post_list %}
                     <div class = "column">
-                        <img src="{{ listing.image.url }}" alt="{{ listing.name }}">
+                        <img src="{{ listing.image.url }}" style="height:350; width:350" alt="{{ listing.name }}">
                         <h2> {{ listing.name }} -  ${{ listing.price }} </h2>
-                        <h5> {{ listing.condition }}, {{ listing.category }} </h5>
-                        <p>{{ listing.description }}</p>
+                        <button id="myBtn">More Information</button>
+
+                        <div id="myModal" class="modal">
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <h2> {{ listing.name }} -  ${{ listing.price }} </h2>
+                                <h5> {{ listing.condition }}, {{ listing.category }} </h5>
+                                <p>{{ listing.description }}</p>
+                            </div>    
+                        </div>
                     </div>
                 {% endfor %}
-                </div>
-                {% else %}
-                <p>No posts have been made</p>
-                {% endif %}
+                
             </div>
+        {% else %}
+            <p>No posts have been made</p>
+        {% endif %}
     </div>
-</div>
 
 
 {%endblock%}
@@ -123,7 +169,7 @@
 
 
 
-<!-- FOOTER
+<!-- FOOTER 
 <footer class="footer bg-dark" style="position:absolute; width:100%; height: 2.5rem;bottom:0;">
     <div class="container">
         <div class="row">
@@ -132,8 +178,40 @@
             </div>
         </div>
     </div>
-</footer> --->
+</footer>  -->
+
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");    
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];   
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }  
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    } 
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 
 </body>
 
 </html>
+
+
+
+
+<!--Citation
+    for the button description
+    https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal
+-->
