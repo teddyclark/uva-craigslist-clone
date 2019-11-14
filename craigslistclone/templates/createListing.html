@@ -47,16 +47,17 @@
     </nav>
 
 
-    <div class="d-flex flex-column justify-content-center" style="margin-left: 50px; margin-right: 50px;">
-    <ol class="breadcrumb">
+    <div class="d-flex flex-column justify-content-center" style="margin-left: 30%; margin-right: 30%; padding-top:75px;">
+    <!--<ol class="breadcrumb">
         <li class="active">Create Event</li>
-    </ol>
+    </ol>-->
+    <h1 style="font-size:32px; text-align:center;">Create a New Listing</h1>
       <form enctype="multipart/form-data" action="{% url 'createListing' %}" id="isting-form" method="post" role="form">
         {% csrf_token %}
         {{ form.status }}
         {% for field in form.visible_fields %}
           <div class="form-group{% if field.errors %} has-error{% endif %}">
-            <label for="{{ field.label }}" class="control-label">{{ field.label }}</label>
+            <label for="{{ field.label }}" style="font-weight: bold" class="control-label">{{ field.label }}</label>
             {{ field }}
             {% if field.help_text %}
               <span class="help-block">{{ field.help_text }}</span>
@@ -70,7 +71,7 @@
         <div class="container">
           <div class="row">
             <div class="col text-center">
-              <button type="submit" class="btn btn-primary btn-lg create">Create</button>
+              <button type="submit" class="btn btn-success btn-lg create">Create</button>
             </div>
           </div>
         </div>
@@ -79,7 +80,7 @@
         <div class="container">
           <div class="row">
             <div class="col text-center" style="padding-top: 20px">
-              <a href="{% url 'home' %}" class="btn btn-default btn-sm btn-outline-dark">'Cancel'</a>
+              <a href="{% url 'home' %}" role="button" class="btn btn-danger btn-sm btn-outline-dark">Cancel</a>
             </div>
           </div>
         </div>
