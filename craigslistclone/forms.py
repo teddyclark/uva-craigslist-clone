@@ -10,8 +10,8 @@ class ListingForm(forms.ModelForm):
         required=True)
     description = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'form-control'}),
-        max_length=3000)
-    image = forms.ImageField(required=False)
+        max_length=300)
+    image = forms.ImageField(required=True)
     price = forms.DecimalField(
         widget=forms.NumberInput(attrs={'class': 'form-control', 'step':0.25}),
         max_digits=6, 
@@ -19,7 +19,7 @@ class ListingForm(forms.ModelForm):
         required=True,
     )
     condition = forms.CharField(
-        label='What is the condition of the item?',
+        label='Condition',
         widget=forms.Select(
             attrs={'class': 'form-control'},
             choices = (
@@ -32,7 +32,7 @@ class ListingForm(forms.ModelForm):
         required=True,
     )
     category = forms.CharField(
-        label='What type of item is this?',
+        label='Category',
         widget=forms.Select(attrs={'class': 'form-control'},
             choices = (
                 ('TB', 'Textbook'),
@@ -45,7 +45,7 @@ class ListingForm(forms.ModelForm):
     )
     class Meta:
         model = Listing
-        fields = ['name', 'description', 'image', 'price', 'condition', 'category']
+        fields = ['name', 'price', 'description', 'image', 'condition', 'category']
 
 
 # class RegisterForm(forms.ModelForm):

@@ -90,6 +90,8 @@ class Listing(models.Model):
     
     associated_username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
 
+    associated_username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+
     #cover = Image.open(image)
     #if cover not in ("L", "RGB"):
         #cover = cover.convert("RGB")
