@@ -46,12 +46,36 @@
         </div>
     </nav>
 
+    <!--Styling to handle mobile screen size-->
+    <style>
+        #form {
+            margin-right:28%;
+            margin-left:28%
 
-    <div class="d-flex flex-column justify-content-center" style="margin-left: 30%; margin-right: 30%; padding-top:75px;">
+        }
+        @media only screen and (max-width:900px) {
+            #form {
+                margin-right: 3%;
+                margin-left: 3%;
+            }
+        }
+    </style>
+
+    <div id='form' class="d-flex flex-column justify-content-center" 
+        style="
+            background-color: #F5F5F5;
+            border-radius: 50px;
+            margin-top: 100px;
+            padding-top:50px;
+            padding-right: 50px;
+            padding-left: 50px;"
+    >
+    
     <!--<ol class="breadcrumb">
         <li class="active">Create Event</li>
     </ol>-->
     <h1 style="font-size:32px; text-align:center;">Create a New Listing</h1>
+    <p style="text-align:center">Please ensure you have read the listing guidelines.</p>
       <form enctype="multipart/form-data" action="{% url 'createListing' %}" id="isting-form" method="post" role="form">
         {% csrf_token %}
         {{ form.status }}
