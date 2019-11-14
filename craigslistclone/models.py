@@ -102,7 +102,7 @@ class Listing(models.Model):
         decimal_places = 2,
         default = 0.00
         )
-    condition = models.CharField(
+    condition = models.CharField( 
         max_length = 1,
         choices = (
             ('0', 'Bad'),

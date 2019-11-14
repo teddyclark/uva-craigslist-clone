@@ -76,7 +76,7 @@ class Profile(generic.ListView):
         print("Username: ", user)
         return Listing.objects.all().filter(associated_username=user)
 
-
+ 
 
 """ This function just spits out all of the posts that have been made at the moment """
 class ListingView(generic.ListView):
