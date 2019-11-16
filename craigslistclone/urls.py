@@ -26,4 +26,5 @@ urlpatterns = [
     path('listings/', views.ListingView.as_view(), name='listings'),
     path('logout/', views.logout, name='logout'),
     url(r'^search/$', views.search, name='search'),
+    path('mark_sold/', views.mark_sold, name='mark_sold'),
 ]

@@ -13,6 +13,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 
+
 def home(request):
     if request.user.is_authenticated:
         return render(request, 'home.html')
@@ -20,30 +21,9 @@ def home(request):
         return render(request, 'login.html')
 
 
-
 def logout(request):
     auth_logout(request)
     return redirect('/')
-
-# def createListingPage(request):
-#     if request.user.is_authenticated:
-#         return render(request, 'createListing.html')
-#     else:
-#         return render(request, 'login.html')
-
-# class CreateListing(LoginRequiredMixin, CreateView):
-#     login_url = '/'
-#     template_name = 'createListing.html'
-#     form_class = ListingForm
-
-#     # form_class = ListingForm
-#     success_url = reverse_lazy('home')
-
-#     def form_valid(self, form):
-#         print("form valid")
-#         return super(CreateListing, self).form_valid(form)
-
-
 
 
 def createListing(request, template_name="createListing.html"):
@@ -89,7 +69,6 @@ class ListingView(generic.ListView):
         return Listing.objects.all()
 
 
-
 def search(request):
     if 'q' in request.GET:
         querystring = request.GET.get('q').strip()
@@ -104,3 +83,48 @@ def search(request):
 
     else:
         return render(request, 'results.html')
+
+
+def mark_sold(request):
+
+    if request.user.is_authenticated:
+        instance = Listing.objects.get(pk=request.id)
+
+        user = request.user.username
+
+        print("ID BITCH: ", instance)
+
+        # return render(request, "createListing.html")
+        return redirect("home.html")
+
+    # user clicks button on post that says "mark sold"
+
+    # BEFORE ANYTHING - request checks to make sure the post associated_username is equal to the logged in username - if not, throw error
+
+    # request grabs ID of post instance
+
+    # sends request to model to change the boolean value from False to True
+
+    # redirects back to profile
+
+
+    # return refresh page
+
+
+
+def createListing(request, template_name="createListing.html"):
+    if request.user.is_authenticated:
+        user = User.objects.get(username=request.user.username)
+        if request.method == 'POST':
+            form = ListingForm(request.POST)
+            print("USERNAME: ", request.user.username)
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.associated_username = user
+                instance.save()
+                return redirect('home')
+        else:  
+            form = ListingForm()
+        return render(request, template_name, {'form': form})
+    else:   
+        return render(request, 'login.html')

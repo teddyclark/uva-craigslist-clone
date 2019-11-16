@@ -142,8 +142,10 @@
                 {% for listing in latest_post_list %}
                     <div class = "column">
                         <img src="{{ listing.image.url }}" style="height:350; width:350" alt="{{ listing.name }}">
-                        <h2> {{ listing.name }} -  ${{ listing.price }} </h2>
+                        <h2> {{ listing.name }} -  ${{ listing.price }} - {{ listing.id }}</h2>
                         <button id="myBtn">More Information</button>
+
+                        
 
                         <div id="myModal" class="modal">
                             <!-- Modal content -->
@@ -154,6 +156,17 @@
                                 <p>{{ listing.description }}</p>
                             </div>
                         </div>
+
+                        <p>POSTED BY: {{ listing.associated_username }}</p>
+                        <p>YOU'RE LOGGED IN AS: {{ user.username }}</p>
+                        
+
+                        {% if listing.associated_username == user.username %}
+                            <button>Remove this Listing</button>
+                        {% else %}
+                            <p>FUUUUUUUUCK YOU</p>
+                        {% endif %}
+                        
                     </div>
                 {% endfor %}
                 
@@ -164,7 +177,7 @@
     </div>
 
 
-{%endblock%}
+{% endblock %}
 
 </section>
 

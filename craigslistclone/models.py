@@ -3,6 +3,7 @@ from django.db import models
 #rom io import StringIO
 import bcrypt
 from django.conf import settings
+import uuid
 
 
 class UserManager(models.Manager):
@@ -85,19 +86,12 @@ class ListingManager(models.Manager):
 class Listing(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(max_length=1024)
-    image = models.ImageField(
-        upload_to='image_folder/', default='image_folder/no-img.jpg')
+    image = models.ImageField(upload_to='image_folder/', default='image_folder/no-img.jpg')
     
     associated_username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
-
-    associated_username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
-
-    #cover = Image.open(image)
-    #if cover not in ("L", "RGB"):
-        #cover = cover.convert("RGB")
-
-    #cover = cover.thumbnail((500, 500), Image.ANTIALIAS)
-    #cover.save()
+    sold = models.BooleanField(default=False)
+    # unique_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     price = models.DecimalField(
         max_digits = 6, 
