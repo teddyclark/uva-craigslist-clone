@@ -11,6 +11,7 @@ from.models import User, Listing, GoogleUserList
 from django.views import generic
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 
 def home(request):
     if request.user.is_authenticated:
@@ -18,11 +19,23 @@ def home(request):
     else:
         return render(request, 'login.html')
 
-def profile(request):
-    if request.user.is_authenticated:
-        return render(request, 'profile.html')
-    else:
-        return render(request, 'login.html')
+#def profile(request):
+#    if request.user.is_authenticated:
+#        return render(request, 'profile.html')
+#    else:
+#        return render(request, 'login.html')
+class Profile(generic.ListView):
+    login_url = '/'
+    template_name = 'profile.html'
+    model = Listing
+    context_object_name = 'latest_post_list'
+
+    def get_queryset(self):
+        user = User.objects.get(username=self.request.user.username)
+        print("Username: ", user)
+        return Listing.objects.all().filter(associated_username=user)
+
+
 
 def logout(request):
     auth_logout(request)
@@ -34,19 +47,32 @@ def logout(request):
 #     else:
 #         return render(request, 'login.html')
 
-class CreateListing(LoginRequiredMixin, CreateView):
-    login_url = '/'
-    template_name = 'createListing.html'
-    form_class = ListingForm
-
-    # form_class = ListingForm
-    success_url = reverse_lazy('listings')
-
-    def form_valid(self, form):
-        print("form valid")
-        return super(CreateListing, self).form_valid(form)
+#class CreateListing(LoginRequiredMixin, CreateView):
+#    login_url = '/'
+#    template_name = 'createListing.html'
+#    form_class = ListingForm
+#    success_url = reverse_lazy('listings')
+#   def form_valid(self, form):
+#        print("form valid")
+#        return super(CreateListing, self).form_valid(form)
 
  
+def createListing(request, template_name="createListing.html"):
+    if request.user.is_authenticated:
+        user = User.objects.get(username=request.user.username)
+        if request.method == 'POST':
+            form = ListingForm(request.POST)
+            print("USERNAME: ", request.user.username)
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.associated_username = user
+                instance.save()
+                return redirect('home')
+        else:
+            form = ListingForm()
+        return render(request, template_name, {'form': form})
+    else:
+        return render(request, 'login.html')
 
 """ This function just spits out all of the posts that have been made at the moment """
 class ListingView(generic.ListView):

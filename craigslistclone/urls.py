@@ -10,17 +10,16 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('createListing/', views.CreateListing.as_view(), name="createListing"),
+    # path('createListing/', views.CreateListing.as_view(), name="createListing"),
+    path('createListing/', views.createListing, name="createListing"),
     path('', include('social_django.urls', namespace='social')),
     # path('logout/', logout, {'home': settings.LOGOUT_REDIRECT_URL}, name='logout'),
 
-    # path('register/',  views.register, name="register"),
-    # path('login/',  views.login, name="login"),
     # path('logout/', views.logout, name="logout"),
     # path('home/', views.home, name="home")
-    # path('tempListing/', views.tempListing, name = 'tempListing'),
     # path('welcome/', views.welcome, name = 'welcome'),
-    path('profile/', views.profile, name='profile'),
+    # path('profile/', views.profile, name='profile'),
+    path('profile/', views.Profile.as_view(), name='profile'),
     path('listings/', views.ListingView.as_view(), name='listings'),
     path('logout/', views.logout, name='logout'),
     url(r'^search/$', views.search, name='search'),
