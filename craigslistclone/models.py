@@ -2,6 +2,7 @@ from django.db import models
 #from PIL import Image, ImageOps
 #rom io import StringIO
 import bcrypt
+from django.conf import settings
 
 
 class UserManager(models.Manager):
@@ -86,6 +87,9 @@ class Listing(models.Model):
     description = models.TextField(max_length=1024)
     image = models.ImageField(
         upload_to='image_folder/', default='image_folder/no-img.jpg')
+
+    associated_username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+
 
     #cover = Image.open(image)
     #if cover not in ("L", "RGB"):
