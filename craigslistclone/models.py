@@ -86,8 +86,8 @@ class Listing(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(max_length=1024)
     image = models.ImageField(
-        upload_to='image_folder/', default='image_folder/error.png')
-    associated_username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+        upload_to='image_folder/', default='image_folder/no-img.jpg')
+    associated_username = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
 
     #cover = Image.open(image)

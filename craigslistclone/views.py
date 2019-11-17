@@ -67,7 +67,7 @@ def createListing(request, template_name="createListing.html"):
                 instance = form.save(commit=False)
                 instance.associated_username = user
                 instance.save()
-                return redirect('home')
+                return redirect('listings')
         else:
             form = ListingForm()
         return render(request, template_name, {'form': form})
