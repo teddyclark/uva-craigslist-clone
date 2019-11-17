@@ -3,6 +3,10 @@ from django.db import models
 #rom io import StringIO
 import bcrypt
 from django.conf import settings
+from django.db import models
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
 
 
 class UserManager(models.Manager):
@@ -87,7 +91,7 @@ class Listing(models.Model):
     description = models.TextField(max_length=1024)
     image = models.ImageField(
         upload_to='image_folder/', default='image_folder/no-img.jpg')
-    associated_username = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    associated_username = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
 
 
     #cover = Image.open(image)
