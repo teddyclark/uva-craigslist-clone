@@ -12,6 +12,7 @@ from django.views import generic
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from users.models import CustomUser
 
 def home(request):
     if request.user.is_authenticated:
@@ -60,7 +61,7 @@ def logout(request):
  
 def createListing(request, template_name="createListing.html"):
     if request.user.is_authenticated:
-        user = User.objects.get(username=request.user.username)
+        user = CustomUser.objects.get(username=request.user.username)
         if request.method == 'POST':
             form = ListingForm(request.POST)
             print("USERNAME: ", request.user.username)

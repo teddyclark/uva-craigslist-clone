@@ -28,6 +28,9 @@ DEBUG = True
 ALLOWED_HOSTS = ['loxodante.herokuapp.com', 'localhost']
 
 
+AUTH_USER_MODEL = 'users.CustomUser'
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django',
+    'users',
 ]
 
 AUTHENTICATION_BACKENDS = (
