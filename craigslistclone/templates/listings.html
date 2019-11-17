@@ -113,7 +113,7 @@
                             <a href="#" title="Description" data-toggle='popover' data-content="{{ listing.description }},{{ listing.condition }}, {{ listing.category }}">More Information</a><br>
                         </div>
 
-                        <p>POSTED BY: {{ listing.associated_username }}</p>
+                        <p>POSTED BY: <a href="mailto:{{ listing.associated_username }}@virginia.edu">{{ listing.associated_username }}</a></p>
                         <p>YOU'RE LOGGED IN AS: {{ user.username }}</p>
                         
 
