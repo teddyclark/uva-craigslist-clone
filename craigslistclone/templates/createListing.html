@@ -29,7 +29,7 @@
               <a class="nav-link" href="{% url 'home' %}">Home</a>
               <span class="sr-only">(current)</span>
               </li> -->
-              <li class="nav-item">
+              <li class="nav-item active">
                   <a class="nav-link" href="{% url 'createListing' %}">Create New Listing</a>
               </li>
               <li class="nav-item">
@@ -97,7 +97,8 @@
         <div class="container">
           <div class="row">
             <div class="col text-center">
-              <button type="submit" class="btn btn-success btn-lg create">Create</button>
+              <!--<button type="submit" class="btn btn-success btn-lg create">Create</button>-->
+              <a href="{% url 'listings' %}" role="button" class="btn btn-success btn-lg create">Create</a>
             </div>
           </div>
         </div>
