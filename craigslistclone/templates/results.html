@@ -47,6 +47,7 @@
     </nav>
 
     <div class="container" style="margin-top:100px">
+        <h1 style="font-size:32px; text-align:center;">Search Results</h1>
         <div class = "searchBar">
             <form class="navbar-form navbar-left" role="search" action="{% url 'search' %}">
                 <div class="input-group" style="width:210px">
@@ -58,22 +59,35 @@
             </form>
         </div>
 
-        <div class="page-header">
-            <div class="row">
-                <div class="col-md-10">
-                <h1>Search Results</h1>
-                </div>
-            </div>
-        </div>
         <div class="row results">
             <div class="col-md-10">
                 {% if results %}
-                    <div class="row">
+                    <div class="row" style="margin-right: 10%; margin-left: 10%">
                         {% for listing in results %}
+                        <!--
                         <div class="column">
                             <img src="{{ listing.image.url }}" alt="{{ listing.name }}">
                             <h2> {{ listing.name }} -  ${{ listing.price }} </h2>
+                        </div>-->
+                        <div class="column" style="
+                            background-color:#F5F5F5;
+                            border-radius:50px;
+                            box-shadow: 0px 2px 20px 1px rgba(0, 0, 0, 0.2);
+                            padding-left: 50px;
+                            padding-right: 50px;
+                            justify-content:center;
+                            width: 400px;
+                            margin:25px auto;">
+                            <h2>{{ listing.name }}</h2>
+                            <img src="{{ listing.image.url }}" style="height:300px; width:300px" alt="{{ listing.name }}">
+                            <h3> ${{ listing.price }} </h3>
+                            <p style="font-weight:bold; margin:0px; padding:0px;">Seller: <a href="mailto:{{ listing.associated_username }}@virginia.edu">{{ listing.associated_username }}</a></p>
+                            <p style="font-weight:bold; margin:0px; padding:0px;">Category: {{ listing.get_category_display }}</p>
+                            <p style="font-weight:bold">Condition: {{ listing.get_condition_display }}</p> 
+                            <p>{{ listing.description }}</p>
                         </div>
+    
+                    </div>
                         {% endfor %}
                     </div>
                 {% else %}
