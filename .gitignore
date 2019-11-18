@@ -8,4 +8,4 @@ migrations/
 # Compiled Python Files #
 *.pyc
 _pycache_/
-db.sqlite3
+# db.sqlite3
