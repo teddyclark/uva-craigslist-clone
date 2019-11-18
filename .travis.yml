@@ -4,7 +4,10 @@ python:
 install:
 - pip install -r requirements-travis.txt
 script:
-- python manage.py test craigslistclone --keepdb
+- python manage.py makemigrations craigslistclone
+- python manage.py makemigrations users
+- python manage.py migrate --run-syncdb
+- python manage.py test craigslistclone
 deploy:
   provider: heroku
   api_key:
