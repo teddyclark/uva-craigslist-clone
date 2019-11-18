@@ -10,6 +10,10 @@
 
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
+
+
+
+
 <body>
     {% csrf_token %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -20,21 +24,22 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home' %}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'createListing' %}">Create New Listing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'listings' %}">Listings</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                    </li>
+                <!-- <li class="nav-item active">
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
+                <span class="sr-only">(current)</span>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'createListing' %}">Create New Listing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'listings' %}">Listings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
                 </ul>
             </div>
         </div>
@@ -69,20 +74,39 @@
           </div>
     </section>
 
+
     <section>
-        <div class= "lists justify-content-center">
+        <div class= "lists">
             <h1>All Listings:</h1>
             {% if latest_post_list %}
                 <div class="row">
                     {% for listing in latest_post_list %}
+
                         <div class = "column">
-                            <img src="{{ listing.image.url }}" style="height:350; width:350" alt="{{ listing.name }}">
+                            {% if listing.image %}
+                                <img src="{{ listing.image.url }}" style="height:350; width:350" alt="{{ listing.name }}">
+                            {% endif %}
                             <h2> {{ listing.name }} -  ${{ listing.price }} </h2>
-                            <h5> {{ listing.condition }}, {{ listing.category }} </h5>
-                            <p>{{ listing.description }}</p>
+                            <button id="myBtn">More Information</button>
+    
+                            <div id="myModal" class="modal">
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <h2> {{ listing.name }} -  ${{ listing.price }} </h2>
+                                    <h5> {{ listing.condition }}, {{ listing.category }} </h5>
+                                    <p>{{ listing.description }}</p>
+                                </div>    
+                            </div>
+
+                            <p>POSTED BY: {{ listing.associated_username }}</p>
+                            <p>YOU'RE LOGGED IN AS: {{ user.username }}</p>
+                            
+                            <button><a href="{% url 'delete_post' %}">Remove Listing</a></button>
+
                         </div>
                     {% endfor %}
-
+                    
                 </div>
             {% else %}
                 <p>You have not made any posts yet</p>
@@ -94,11 +118,11 @@
 
 
     <!-- FOOTER -->
-    <footer class="footer bg-dark" style="position:absolute; width:100%; bottom:0;">
+    <footer class="footer bg-dark" style="position:absolute; width:100%; height: 2.5rem;bottom:0;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 text-center text-lg-left my-auto">
-                    <p class="text-muted mb-4 mb-lg-0">© CS3240 - Loxodanta 2019</p>
+                    <p class="text-muted mb-4 mb-lg-0">© CS3240 - Loxodante 2019</p>
                 </div>
             </div>
         </div>

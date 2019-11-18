@@ -137,7 +137,9 @@
             <div class="row">
                 {% for listing in latest_post_list %}
                     <div class = "column">
-                        <img src="{{ listing.image.url }}" style="height:350; width:350" alt="{{ listing.name }}">
+                        {% if listing.image %}
+                            <img src="{{ listing.image.url }}" style="height:350; width:350" alt="{{ listing.name }}">
+                        {% endif %}
                         <h2> {{ listing.name }} -  ${{ listing.price }} </h2>
                         <button id="myBtn">More Information</button>
 

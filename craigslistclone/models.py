@@ -6,6 +6,7 @@ from django.conf import settings
 from django.db import models
 # from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
+import uuid
 
 
 
@@ -89,9 +90,12 @@ class ListingManager(models.Manager):
 class Listing(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(max_length=1024)
-    image = models.ImageField(
-        upload_to='image_folder/', default='image_folder/no-img.jpg')
+    image = models.ImageField(null=True, blank=True, upload_to='image_folder/')
     associated_username = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
+
+    sold = models.BooleanField(default=False)
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
 
     #cover = Image.open(image)

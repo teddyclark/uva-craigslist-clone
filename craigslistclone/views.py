@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from .forms import ListingForm
 from django.views.generic import CreateView
 from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseForbidden
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.db.models import Q
 # from django.contrib import messages
@@ -63,11 +63,12 @@ def createListing(request, template_name="createListing.html"):
     if request.user.is_authenticated:
         user = CustomUser.objects.get(username=request.user.username)
         if request.method == 'POST':
-            form = ListingForm(request.POST)
+            form = ListingForm(request.POST, request.FILES)
             print("USERNAME: ", request.user.username)
             if form.is_valid():
                 instance = form.save(commit=False)
                 instance.associated_username = user
+                print("IMAGE FIELD: ", instance.image)
                 instance.save()
                 return redirect('listings')
         else:
@@ -101,3 +102,46 @@ def search(request):
 
     else:
         return render(request, 'results.html')
+
+
+def delete_post(request, id=None):
+
+    creator = request.user.username
+    # instance = get_object_or_404(Listing, id=id)
+
+    print("CREATOR: ", creator)
+
+    return render(request, 'delete_post.html')
+
+    # print("INSTANCE: ", instance)
+
+    # if request.method == "POST" and request.user.is_authenticated and request.user.username == creator:
+
+    #     instance.delete()
+
+    #     return render(request, 'delete_post.html')
+
+    # else:
+    #     return render(request, 'createListing.html')
+
+# def delete_post(request):
+#     return render(request, 'delete_post.html')
+
+
+
+# def movies_delete_view(request, id=None):
+
+#     movie= get_object_or_404(Movie, id=id)
+
+#     creator= movie.user.username
+
+#     if request.method == "POST" and request.user.is_authenticated and request.user.username == creator:
+#         movie.delete()
+#         messages.success(request, "Post successfully deleted!")
+#         return HttpResponseRedirect("/Blog/list/")
+    
+#     context= {'movie': movie,
+#               'creator': creator,
+#               }
+    
+#     return render(request, 'Blog/movies-delete-view.html', context)
