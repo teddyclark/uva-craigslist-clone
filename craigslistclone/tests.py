@@ -2,8 +2,9 @@ import unittest
 
 from django.test import TestCase, Client
 from django.urls import reverse, resolve
-from craigslistclone.models import User, Listing
+from craigslistclone.models import Listing
 from craigslistclone.views import home
+from users.models import CustomUser
 
 class TestStringMethods(unittest.TestCase):
     # temporary tests
@@ -22,15 +23,15 @@ class TestUrl(unittest.TestCase):
         self.assertEqual(found.func, home)
 class TestUserModel(unittest.TestCase):
     def test_usernameTest(self):
-        user = User(username = 'tester')
+        user = CustomUser(username = 'tester')
         self.assertEqual(user.username, "tester")
     def test_first_name(self):
-        user = User(firstName = "John")
-        self.assertEqual(user.firstName, "John")
+        user = CustomUser(first_name = "John")
+        self.assertEqual(user.first_name, "John")
     # exception test
     def test_last_name(self):
-        user = User(lastName = "Doe")
-        self.assertFalse(user.lastName == "Day")  
+        user = CustomUser(last_name = "Doe")
+        self.assertFalse(user.last_name == "Day")
 
 class ViewsTestNoUser(TestCase):
     def setUp(self):

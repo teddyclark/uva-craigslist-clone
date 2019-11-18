@@ -1,5 +1,5 @@
 from django import forms
-from .models import User, Listing
+from .models import Listing
 from django.core.exceptions import ValidationError
 
 

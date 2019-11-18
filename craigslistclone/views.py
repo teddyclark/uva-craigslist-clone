@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.db.models import Q
 # from django.contrib import messages
-from.models import User, Listing, GoogleUserList
+from.models import Listing, GoogleUserList
 from django.views import generic
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -32,7 +32,7 @@ class Profile(generic.ListView):
     context_object_name = 'latest_post_list'
 
     def get_queryset(self):
-        user = User.objects.get(username=self.request.user.username)
+        user = CustomUser.objects.get(username=self.request.user.username)
         print("Username: ", user)
         return Listing.objects.all().filter(associated_username=user)
 
