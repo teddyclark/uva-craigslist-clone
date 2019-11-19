@@ -77,16 +77,34 @@ def createListing(request, template_name="createListing.html"):
     else:
         return render(request, 'login.html')
 
-""" This function just spits out all of the posts that have been made at the moment """
 class ListingView(generic.ListView):
     login_url = '/'
     template_name = 'listings.html'
     model = Listing
     #form_class = ListingForm
     context_object_name = 'latest_post_list'
+    paginate_by = 10
 
     def get_queryset(self):
-        return Listing.objects.all()
+        querystring = self.request.GET.get('q')
+        categorystring = self.request.GET.get('cat')
+        switcher = {
+            "All": "All",
+            "Textbook": "TB",
+            "Furniture": "FN",
+            "Clothes": "CL",
+            "Electronics": "EL",
+            "Other": "OT",   
+        }
+        category = switcher.get(categorystring, "trolol")
+        if querystring:
+            return Listing.objects.filter(Q(name__icontains=querystring) | Q(description__icontains=querystring))
+        if category:
+            if category == "All":
+                return Listing.objects.all()
+            return Listing.objects.filter(Q(category__icontains=category))
+        else:
+            return Listing.objects.all()
 
 def search(request):
     if 'q' in request.GET:
