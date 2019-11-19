@@ -46,24 +46,11 @@ class ViewsTestNoUser(TestCase):
     def testProfilePage(self):
         response = self.client.get("profile/")
         self.assertEqual(response.status_code, 404)
-    #def testCreatePostPage(self):                  #this is a bug
-    #    response = self.client.get("/createListing/")
-    #    self.assertEqual(response.status_code, 404)
-    #def testListingsPage(self):
-    #    response = self.client.get("/listings/")
-    #    self.assertEqual(response.status_code, 404)
-'''
-class ViewsTest(TestCase):
-    def setUp(self):
-        #user = GoogleUserList(registered_user = "john")
-        self.client = Client()
-        #self.client.force_login(user)
-        self.client.force_login(User.objects.get_or_create(username='testuser')[0])
-    #def testLogInPage(self):
-    #    response = self.client.get("/")
-    #    self.assertEqual(response.status_code, 200)
-'''
+    def testCreatePostPage(self):                  #is this the correct behavior we want?
+       response = self.client.get("/createListing/")
+       self.assertEqual(response.status_code, 200)
 
+# tests features about listings 
 class TestListing(unittest.TestCase):
     def test_listingname(self):
         listing = Listing(name = 'testname')
@@ -71,3 +58,21 @@ class TestListing(unittest.TestCase):
     def test_price(self):
         listing = Listing(name = 'testname', price = 51.12)
         self.assertEqual(listing.price, 51.12)
+
+# Test listing time
+# class TestListingTime(unittest.TestCase):
+#     def test_upload_time(self):
+#         listing = Listing(created_at = timezone.now())
+#         self.assertIs(listing.created_at, listing.created_at)
+
+class ViewsTest(TestCase):
+    def setUp(self):
+        self.user = CustomUser.objects.create(username='testuser')
+        login = self.client.login(username='testuser')
+        # user = GoogleUserList(registered_user = "john")
+        # self.client = Client()
+        # # self.client.force_login(user)
+        # self.client.force_login(User.objects.get_or_create(username='testuser')[0])
+    def testLogInPage(self):
+       response = self.client.get("/")
+       self.assertEqual(response.status_code, 200)
