@@ -13,9 +13,10 @@ class ListingForm(forms.ModelForm):
         max_length=300)
     image = forms.ImageField(required=True)
     price = forms.DecimalField(
-        widget=forms.NumberInput(attrs={'class': 'form-control', 'step':0.25}),
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'step':0.01}),
         max_digits=6, 
         decimal_places=2,
+        min_value=0.01,
         required=True,
     )
     condition = forms.CharField(
@@ -43,9 +44,21 @@ class ListingForm(forms.ModelForm):
             )),
         required=True,
     )
+    place = forms.CharField(
+        label='Meeting Location',
+        widget=forms.Select(attrs={'class': 'form-control'},
+            choices = (
+                ('0', 'Rotunda'),
+                ('1', 'Rice Hall'),
+                ('2', 'O-Hill'),
+                ('3', '1515 on the Corner'),
+                ('4', 'McLeod Hall'),
+            )),
+        required=True,
+    )
     class Meta:
         model = Listing
-        fields = ['name', 'price', 'description', 'image', 'condition', 'category']
+        fields = ['name', 'price', 'description', 'image', 'condition', 'category', 'place']
 
 
 # class RegisterForm(forms.ModelForm):

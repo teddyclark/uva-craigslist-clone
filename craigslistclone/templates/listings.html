@@ -130,6 +130,7 @@
                         <p style="font-weight:bold; margin:0px; padding:0px;">Contact Seller: <a href="mailto:{{ listing.associated_username }}@virginia.edu">{{ listing.associated_username }}</a></p>
                         <p style="font-weight:bold; margin:0px; padding:0px;">Category: {{ listing.get_category_display }}</p>
                         <p style="font-weight:bold">Condition: {{ listing.get_condition_display }}</p> 
+                        <p style="font-weight:bold">Meeting Location: {{ listing.get_place_display }}</p>
                         <p>{{ listing.description }}</p>
     
                         {% if listing.associated_username == user.username %}

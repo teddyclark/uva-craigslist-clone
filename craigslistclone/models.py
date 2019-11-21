@@ -7,6 +7,8 @@ from django.db import models
 # from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 import uuid
+from django.core.validators import MinValueValidator
+from decimal import Decimal
 
 
 
@@ -108,8 +110,9 @@ class Listing(models.Model):
     price = models.DecimalField(
         max_digits = 6, 
         decimal_places = 2,
+        validators=[MinValueValidator(Decimal('0.01'))],
         default = 0.00
-        )
+    )
     condition = models.CharField(
         max_length = 1,
         choices = (
@@ -131,6 +134,17 @@ class Listing(models.Model):
             ('OT', 'Other'),
         ),
         default = 'OT'
+    )
+    place = models.CharField(
+        max_length = 1,
+        choices = (
+            ('0', 'Rotunda'),
+            ('1', 'Rice Hall'),
+            ('2', 'O-Hill'),
+            ('3', '1515 on the Corner'),
+            ('4', 'McLeod Hall'),
+        ),
+        default = '0'
     )
 
     # need to figure out the key for User before we can implement creator
