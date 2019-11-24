@@ -135,6 +135,7 @@ class Listing(models.Model):
         ),
         default = 'OT'
     )
+    '''
     place = models.CharField(
         max_length = 1,
         choices = (
@@ -146,6 +147,7 @@ class Listing(models.Model):
         ),
         default = '0'
     )
+    '''
 
     # need to figure out the key for User before we can implement creator
     #creator = models.ForeignKey(User, on_delete=models.PROTECT) 

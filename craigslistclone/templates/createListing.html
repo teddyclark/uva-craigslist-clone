@@ -16,34 +16,22 @@
     <meta charset="utf-8">
 </head>
 
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="box-shadow: 0px 2px 20px 1px rgba(0, 0, 0, 0.2);">
-    <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}">Loxodonta</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                <a class="nav-link" href="{% url 'home' %}">Home</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'createListing' %}">Create New Listing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'listings' %}">Listings</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
-                </li>
-                <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<body style="background-color: #F2F2F2">
+  <header class="masthead mb-auto">
+    <div class="navigation-bar" style="background-color: #343A40;">
+      <h3 align="center"> 
+        <a class="masthead-brand static-top justify-content-center" href="{% url 'home' %}" style="color:white">
+          <img src="/media/image_folder/logo.png" width="300" height="120" alt=""> </a>
+      </h3>
+      <nav class="nav nav-masthead justify-content-center">
+        <a class="nav-link" href="{% url 'home' %}" style="color:white">Home</a>
+        <a class="nav-link" href="{% url 'createListing' %}" style="color:white">Create New Listing</a>
+        <a class="nav-link" href="{% url 'listings' %}" style="color:white">Listings</a>
+        <a class="nav-link" href="{% url 'profile' %}" style="color:white">Profile</a>                
+        <a class="nav-link" href="{% url 'logout' %}" style="color:white">Logout</a>
+      </nav>
+    </div>
+  </header>
 
         <!--Styling to handle mobile screen size-->
         <style>
