@@ -6,15 +6,15 @@ from craigslistclone.models import Listing
 from craigslistclone.views import home
 from users.models import CustomUser
 
-class TestStringMethods(unittest.TestCase):
-    # temporary tests
-    def test_1(self):
-        a = 1
-        self.assertEqual(1, a)
-    def test_2(self):
-        b = 4
-        a = 1
-        self.assertFalse(a == b)
+# class TestStringMethods(unittest.TestCase):
+#     # temporary tests
+#     def test_1(self):
+#         a = 1
+#         self.assertEqual(1, a)
+#     def test_2(self):
+#         b = 4
+#         a = 1
+#         self.assertFalse(a == b)
 
 class TestUrl(unittest.TestCase):
     # tests root url resolves to home
@@ -33,7 +33,7 @@ class TestUserModel(unittest.TestCase):
         user = CustomUser(last_name = "Doe")
         self.assertFalse(user.last_name == "Day")
 
-class ViewsTestNoUser(TestCase):
+class ViewsTestNoUser(unittest.TestCase):
     def setUp(self):
         self.client = Client()
         #testing with no user login
@@ -46,8 +46,11 @@ class ViewsTestNoUser(TestCase):
     def testProfilePage(self):
         response = self.client.get("profile/")
         self.assertEqual(response.status_code, 404)
-    def testCreatePostPage(self):                  #is this the correct behavior we want?
+    def testCreatePostPage(self):                  
        response = self.client.get("/createListing/")
+       self.assertEqual(response.status_code, 200)
+    def testListingsPage(self):                 
+       response = self.client.get("/listings/")
        self.assertEqual(response.status_code, 200)
 
 # tests features about listings 
@@ -58,21 +61,41 @@ class TestListing(unittest.TestCase):
     def test_price(self):
         listing = Listing(name = 'testname', price = 51.12)
         self.assertEqual(listing.price, 51.12)
+    def test_condition(self):
+        listing = Listing(name = 'testname', price = 51.12, condition = 0)
+        self.assertEqual(listing.condition, 0)
+    def test_description(self):
+        listing = Listing(name = 'testname', price = 51.12, condition = 0, description = 'great product')
+        self.assertEqual(listing.description, 'great product')
+    def test_sold(self):
+        listing = Listing(name = 'testname', price = 51.12, condition = 0, description = 'great product', sold = True)
+        self.assertEqual(listing.sold, True)
+    def test_not_sold(self):
+        listing = Listing(name = 'testname', price = 51.12, condition = 0, description = 'great product', sold = False)
+        self.assertEqual(listing.sold, False)
+
+class TestListing_restriction(unittest.TestCase):
+    # test name that is too long
+    def test_listingname2(self):
+        listing = Listing(name = 'item' * 40)
+        b = listing.name == 'item'
+        self.assertEqual(b, False)
+    # test price that is not a number
+    def test_price_wrong(self):
+        listing = Listing(name = 'testname', price = 'happy')
+        b = listing.price == 0
+        self.assertEqual(b, False)
+
+class ViewsTest_login(TestCase):
+    def setUp(self):
+        self.user = CustomUser.objects.create(username='testuser')
+        login = self.client.login(username='testuser')
+    def testLogInPage(self):
+       response = self.client.get("/")
+       self.assertEqual(response.status_code, 200)
 
 # Test listing time
 # class TestListingTime(unittest.TestCase):
 #     def test_upload_time(self):
 #         listing = Listing(created_at = timezone.now())
 #         self.assertIs(listing.created_at, listing.created_at)
-
-class ViewsTest(TestCase):
-    def setUp(self):
-        self.user = CustomUser.objects.create(username='testuser')
-        login = self.client.login(username='testuser')
-        # user = GoogleUserList(registered_user = "john")
-        # self.client = Client()
-        # # self.client.force_login(user)
-        # self.client.force_login(User.objects.get_or_create(username='testuser')[0])
-    def testLogInPage(self):
-       response = self.client.get("/")
-       self.assertEqual(response.status_code, 200)
