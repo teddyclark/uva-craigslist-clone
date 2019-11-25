@@ -90,7 +90,7 @@ class ListingManager(models.Manager):
 
 
 class Listing(models.Model):
-    name = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
     description = models.TextField(max_length=1024)
     image = models.ImageField(null=True, blank=True, upload_to='image_folder/')
     associated_username = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)

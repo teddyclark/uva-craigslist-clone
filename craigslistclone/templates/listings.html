@@ -89,7 +89,7 @@
                     justify-content:center;
                     width: 400px;
                     margin:25px auto;">
-                        <h2>{{ listing.name }}</h2>
+                        <h2>{{ listing.title }}</h2>
                         <img src="{{ listing.image.url }}" style="height:300px; width:300px" alt="{{ listing.name }}">
                         <h3> ${{ listing.price }} </h3>
     
@@ -99,13 +99,8 @@
                         <p style="font-weight:bold">Condition: {{ listing.get_condition_display }}</p> 
                         <p style="font-weight:bold">Meeting Location: {{ listing.get_place_display }}</p>
                         <p>{{ listing.description }}</p>
-    
-                        {% if listing.associated_username == user.username %}
-                            <button>Remove this Listing</button>
-                        {% else %}
-                            <p></p>
-                        {% endif %}
-    
+                        <!-- <p><button type="button" data-toggle="popover" title="Popover title" data-content="Here's some amazing content.">Click to toggle popover</button> -->
+                        </p>  
                     </div>
                 {% endfor %} 
             </div>
@@ -121,6 +116,13 @@
 
 </section>
 
+
+
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();
+    });
+</script>
 
 
 <!-- FOOTER
@@ -155,7 +157,9 @@
             modal.style.display = "none";
         }
     }
+
 </script>
+
 
 </body>
 

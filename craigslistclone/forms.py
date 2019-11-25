@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 
 
 class ListingForm(forms.ModelForm):
-    name = forms.CharField(
+    title = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         max_length=255,
         required=True)
@@ -60,41 +60,4 @@ class ListingForm(forms.ModelForm):
     '''
     class Meta:
         model = Listing
-        #fields = ['name', 'price', 'description', 'image', 'condition', 'category', 'place']
-        fields = ['name', 'price', 'description', 'image', 'condition', 'category']
-
-
-
-# class RegisterForm(forms.ModelForm):
-#     firstName = forms.CharField(
-#         widget=forms.TextInput(attrs={'class': 'form-control'}),
-#         max_length=50,
-#         required=True)
-#     lastName = forms.CharField(
-#         widget=forms.TextInput(attrs={'class': 'form-control'}),
-#         max_length=50,
-#         required=True)
-#     username = forms.CharField(
-#         widget=forms.TextInput(attrs={'class': 'form-control'}),
-#         max_length=50,
-#         required=True)
-#     password = forms.CharField(
-#         widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-#     confirm_password = forms.CharField(
-#         widget=forms.PasswordInput(attrs={'class': 'form-control'}),
-#         label="Confirm your password",
-#         required=True)
-
-#     class Meta:
-#         model = User
-#         fields = ['firstName', 'lastName', 'username',
-#                   'password', 'confirm_password', ]
-
-#     def clean(self):
-#         super(RegisterForm, self).clean()
-#         password = self.cleaned_data.get('password')
-#         confirm_password = self.cleaned_data.get('confirm_password')
-#         if password and password != confirm_password:
-#             self._errors['password'] = self.error_class(
-#                 ['Passwords don\'t match'])
-#         return self.cleaned_data
+        fields = ['title', 'price', 'description', 'image', 'condition', 'category']
