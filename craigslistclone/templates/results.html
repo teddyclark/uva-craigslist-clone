@@ -27,7 +27,7 @@
               <nav class="nav nav-masthead justify-content-center">
                 <a class="nav-link" href="{% url 'home' %}" style="color:white">Home</a>
                 <a class="nav-link" href="{% url 'createListing' %}" style="color:white">Create New Listing</a>
-                <a class="nav-link" href="{% url 'listings' %}" style="color:#5FBEC1">Listings</a>
+                <a class="nav-link" href="{% url 'listings' %}?cat=All" style="color:#5FBEC1">Listings</a>
                 <a class="nav-link" href="{% url 'profile' %}" style="color:white">Profile</a>                
                 <a class="nav-link" href="{% url 'logout' %}" style="color:white">Logout</a>
               </nav>
@@ -51,7 +51,7 @@
         </div>
         -->
 
-        <button style="background-color: #5FBEC1; margin-left:41%;"><a class="nav-link" href="{% url 'listings' %}" style="color: #FFFFFF;">Go back to List Page </a></button>
+        <button style="background-color: #5FBEC1; margin-left:41%;"><a class="nav-link" href="{% url 'listings' %}?cat=All" style="color: #FFFFFF;">Go back to List Page </a></button>
 
         <div class="searchBar">
                 <form class="navbar-form navbar-left" role="search" action="{% url 'search' %}">
