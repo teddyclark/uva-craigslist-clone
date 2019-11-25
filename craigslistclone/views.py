@@ -83,7 +83,7 @@ class ListingView(generic.ListView):
         }
         category = switcher.get(categorystring, "trolol")
         if querystring:
-            return Listing.objects.filter(Q(name__icontains=querystring) | Q(description__icontains=querystring))
+            return Listing.objects.filter(Q(title__icontains=querystring) | Q(description__icontains=querystring))
         if category:
             if category == "All":
                 return Listing.objects.all()
@@ -98,7 +98,7 @@ def search(request):
         if len(querystring) == 0:
             return redirect('/search/')
 
-        results = Listing.objects.filter(Q(name__icontains=querystring) | Q(description__icontains=querystring))
+        results = Listing.objects.filter(Q(title__icontains=querystring) | Q(description__icontains=querystring))
         return render(request, 'results.html', {
             'querystring': querystring,
             'results': results,
