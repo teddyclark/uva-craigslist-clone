@@ -59,12 +59,12 @@
             <div class='category-filter'>
                 <!-- <span>Categories:</span> -->
                 <form method="GET" align="center">
-                    <input type="submit" class="btn" value="All" name="cat" style="color: #FFFFFF; background-color: #5FBEC1;">
-                    <input type="submit" class="btn" value="Textbook" name="cat" style="color:#FFFFFF; background-color: #5FBEC1;">
-                    <input type="submit" class="btn" value="Furniture" name="cat" style="color:#FFFFFF; background-color: #5FBEC1;">
-                    <input type="submit" class="btn" value="Clothes" name="cat" style="color:#FFFFFF; background-color: #5FBEC1;">
-                    <input type="submit" class="btn" value="Electronics" name="cat" style="color:#FFFFFF; background-color: #5FBEC1;">
-                    <input type="submit" class="btn" value="Other" name="cat" style="color:#FFFFFF; background-color: #5FBEC1;">
+                    <input type="submit" class="btn" value="All" name="cat" style="color: #5FBEC1; background-color: #343A40;">
+                    <input type="submit" class="btn" value="Textbook" name="cat" style="color: #5FBEC1; background-color: #343A40;">
+                    <input type="submit" class="btn" value="Furniture" name="cat" style="color: #5FBEC1; background-color: #343A40;">
+                    <input type="submit" class="btn" value="Clothes" name="cat" style="color: #5FBEC1; background-color: #343A40;">
+                    <input type="submit" class="btn" value="Electronics" name="cat" style="color: #5FBEC1; background-color: #343A40;">
+                    <input type="submit" class="btn" value="Other" name="cat" style="color: #5FBEC1; background-color: #343A40;">
                 </form>                                       
             </div>
             <div class="searchBar">
@@ -98,9 +98,12 @@
                         <p style="font-weight:bold; margin:0px; padding:0px;">Contact Seller: <a href="mailto:{{ listing.associated_username }}@virginia.edu">{{ listing.associated_username }}</a></p>
                         <p style="font-weight:bold; margin:0px; padding:0px;">Category: {{ listing.get_category_display }}</p>
                         <p style="font-weight:bold">Condition: {{ listing.get_condition_display }}</p> 
-                        <p style="font-weight:bold">Meeting Location: {{ listing.get_place_display }}</p>
                         <p>{{ listing.description }}</p>
-                        <!-- <p><button type="button" data-toggle="popover" title="Popover title" data-content="Here's some amazing content.">Click to toggle popover</button> -->
+
+                        <p style="font-weight:bold">Meeting Location:</p>
+
+                        <a href="{% url 'listing_details' listing.id %}" style="color: #5FBEC1; margin-left: 75px; padding-bottom: 15px;">View Pickup Location</a>
+
                         </p>  
                     </div>
                 {% endfor %} 
@@ -119,52 +122,9 @@
 
 
 
-<script>
-    $(document).ready(function(){
-        $('[data-toggle="popover"]').popover();
-    });
-</script>
-
-
-<!-- FOOTER
-<footer class="footer bg-dark" style="position:absolute; width:100%; height: 2.5rem;bottom:0;">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 text-center text-lg-left my-auto">
-                <p class="text-muted mb-4 mb-lg-0">© Loxodante 2019. All Rights Reserved.</p>
-            </div>
-        </div>
-    </div>
-</footer> --->
-
-<script>
-    // Get the modal
-    var modal = document.getElementById("myModal");    
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];   
-    // When the user clicks the button, open the modal 
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }  
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    } 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-
-</script>
-
-
 </body>
 
-<footer class="footer bg-dark">
+<!-- <footer class="footer bg-dark">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 text-center text-lg-left my-auto">
@@ -172,7 +132,7 @@
             </div>
         </div>
     </div>
-</footer>
+</footer> -->
 
 </html>
 

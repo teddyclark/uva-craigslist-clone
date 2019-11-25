@@ -44,20 +44,26 @@ class ListingForm(forms.ModelForm):
             )),
         required=True,
     )
-    
-    place = forms.CharField(
-        label='Meeting Location',
-        widget=forms.Select(attrs={'class': 'form-control'},
-            choices = (
-                ('0', 'Rotunda'),
-                ('1', 'Rice Hall'),
-                ('2', 'O-Hill'),
-                ('3', '1515 on the Corner'),
-                ('4', 'McLeod Hall'),
-            )),
-        required=True,
+
+    pickup_location = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        max_length=255,
+        required=True
     )
+    
+    # place = forms.CharField(
+    #     label='Meeting Location',
+    #     widget=forms.Select(attrs={'class': 'form-control'},
+    #         choices = (
+    #             ('0', 'Rotunda'),
+    #             ('1', 'Rice Hall'),
+    #             ('2', 'O-Hill'),
+    #             ('3', '1515 on the Corner'),
+    #             ('4', 'McLeod Hall'),
+    #         )),
+    #     required=True,
+    # )
     
     class Meta:
         model = Listing
-        fields = ['title', 'price', 'description', 'image', 'condition', 'category', 'place']
+        fields = ['title', 'price', 'description', 'image', 'condition', 'category', 'pickup_location']

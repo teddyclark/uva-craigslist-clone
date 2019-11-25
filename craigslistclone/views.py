@@ -13,6 +13,8 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from users.models import CustomUser
+from django.utils import timezone
+from geopy import geocoders
 
 def home(request):
     if request.user.is_authenticated:
@@ -52,7 +54,28 @@ def createListing(request, template_name="createListing.html"):
             if form.is_valid():
                 instance = form.save(commit=False)
                 instance.associated_username = user
+
+                # it is necessary to initialize values for latitude and longitude to avoid potential errors - these point to Rice Hall
+                instance.latitude = 38.031603
+                instance.longitude = -78.510779
+                print("LATITUDE: ", instance.latitude, ", LONGITUDE: ", instance.longitude)
                 print("IMAGE FIELD: ", instance.image)
+
+
+                """ This following code takes in pickup_location from the model,
+                    converts that location into coordinates, and saves it the
+                    appropriate fields in the model
+                """
+
+                addr = instance.pickup_location
+                g = geocoders.GoogleV3(api_key='AIzaSyBZiiJxIQrpxmMopu-UyqmZEYX7np2CKsw')
+                location = g.geocode(addr, timeout=10)
+
+                instance.latitude = location.latitude
+                instance.longitude = location.longitude
+
+                print("LATITUDE: ", instance.latitude, ", LONGITUDE: ", instance.longitude)
+
                 instance.save()
                 return redirect('listings')
         else:
@@ -119,3 +142,11 @@ def delete_post(request, pk):
     instance = get_object_or_404(Listing, pk=pk)
     instance.delete()
     return HttpResponseRedirect(reverse('profile'))
+
+
+class DetailView(generic.DetailView):
+    model = Listing
+    template_name = 'listing_details.html'
+
+    def get_queryset(self):
+        return Listing.objects.all()

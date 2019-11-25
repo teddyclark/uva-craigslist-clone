@@ -9,7 +9,8 @@ from django.contrib.auth import get_user_model
 import uuid
 from django.core.validators import MinValueValidator
 from decimal import Decimal
-
+from django.utils import timezone
+import datetime
 
 
 # class UserManager(models.Manager):
@@ -96,16 +97,9 @@ class Listing(models.Model):
     associated_username = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
 
     sold = models.BooleanField(default=False)
-
-    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-
-
-    #cover = Image.open(image)
-    #if cover not in ("L", "RGB"):
-        #cover = cover.convert("RGB")
-
-    #cover = cover.thumbnail((500, 500), Image.ANTIALIAS)
-    #cover.save()
+    pickup_location = models.CharField(max_length=255)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
 
     price = models.DecimalField(
         max_digits = 6, 
@@ -136,17 +130,17 @@ class Listing(models.Model):
         default = 'OT'
     )
     
-    place = models.CharField(
-        max_length = 1,
-        choices = (
-            ('0', 'Rotunda'),
-            ('1', 'Rice Hall'),
-            ('2', 'O-Hill'),
-            ('3', '1515 on the Corner'),
-            ('4', 'McLeod Hall'),
-        ),
-        default = '0'
-    )
+    # place = models.CharField(
+    #     max_length = 1,
+    #     choices = (
+    #         ('0', 'Rotunda'),
+    #         ('1', 'Rice Hall'),
+    #         ('2', 'O-Hill'),
+    #         ('3', '1515 on the Corner'),
+    #         ('4', 'McLeod Hall'),
+    #     ),
+    #     default = '0'
+    # )
     
 
     # need to figure out the key for User before we can implement creator
