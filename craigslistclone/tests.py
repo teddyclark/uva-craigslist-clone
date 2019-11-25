@@ -66,8 +66,8 @@ class ViewsTest(TestCase):
 
 class TestListing(unittest.TestCase):
     def test_listingname(self):
-        listing = Listing(name = 'testname')
-        self.assertEqual(listing.name, "testname")
+        listing = Listing(title = 'testname')
+        self.assertEqual(listing.title, "testname")
     def test_price(self):
-        listing = Listing(name = 'testname', price = 51.12)
+        listing = Listing(title = 'testname', price = 51.12)
         self.assertEqual(listing.price, 51.12)
