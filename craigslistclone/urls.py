@@ -19,7 +19,8 @@ urlpatterns = [
     path('listings/', views.ListingView.as_view(), name='listings'),
     path('logout/', views.logout, name='logout'),
     url(r'^search/$', views.search, name='search'),
-    path('delete_post/', views.delete_post, name='delete_post'),
+    path('<int:pk>/delete_post/', views.delete_post, name='delete_post'),
+    path('<int:pk>/mark_sold/', views.mark_sold, name='mark_sold'),
 ]
 
 if settings.DEBUG: 

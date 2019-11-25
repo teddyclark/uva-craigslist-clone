@@ -2,7 +2,7 @@ from django.urls import reverse_lazy
 # from .utils import is_login
 from .forms import ListingForm
 from django.views.generic import CreateView
-from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseForbidden
+from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.db.models import Q
@@ -42,22 +42,6 @@ def logout(request):
     auth_logout(request)
     return redirect('/')
 
-# def createListingPage(request):
-#     if request.user.is_authenticated:
-#         return render(request, 'createListing.html')
-#     else:
-#         return render(request, 'login.html')
-
-# class CreateListing(LoginRequiredMixin, CreateView):
-#    login_url = '/'
-#    template_name = 'createListing.html'
-#    form_class = ListingForm
-#    success_url = reverse_lazy('listings')
-
-#    def form_valid(self, form):
-#        print("form valid")
-#        return super(CreateListing, self).form_valid(form)
-
  
 def createListing(request, template_name="createListing.html"):
     if request.user.is_authenticated:
@@ -76,6 +60,7 @@ def createListing(request, template_name="createListing.html"):
         return render(request, template_name, {'form': form})
     else:
         return render(request, 'login.html')
+
 
 class ListingView(generic.ListView):
     login_url = '/'
@@ -106,6 +91,7 @@ class ListingView(generic.ListView):
         else:
             return Listing.objects.all()
 
+
 def search(request):
     if 'q' in request.GET:
         querystring = request.GET.get('q').strip()
@@ -122,44 +108,14 @@ def search(request):
         return render(request, 'results.html')
 
 
-def delete_post(request, id=None):
-
-    creator = request.user.username
-    # instance = get_object_or_404(Listing, id=id)
-
-    print("CREATOR: ", creator)
-
-    return render(request, 'delete_post.html')
-
-    # print("INSTANCE: ", instance)
-
-    # if request.method == "POST" and request.user.is_authenticated and request.user.username == creator:
-
-    #     instance.delete()
-
-    #     return render(request, 'delete_post.html')
-
-    # else:
-    #     return render(request, 'createListing.html')
-
-# def delete_post(request):
-#     return render(request, 'delete_post.html')
+def mark_sold(request, pk):
+    instance = get_object_or_404(Listing, pk=pk)
+    instance.sold = True
+    instance.save()
+    return HttpResponseRedirect(reverse('profile'))
 
 
-
-# def movies_delete_view(request, id=None):
-
-#     movie= get_object_or_404(Movie, id=id)
-
-#     creator= movie.user.username
-
-#     if request.method == "POST" and request.user.is_authenticated and request.user.username == creator:
-#         movie.delete()
-#         messages.success(request, "Post successfully deleted!")
-#         return HttpResponseRedirect("/Blog/list/")
-    
-#     context= {'movie': movie,
-#               'creator': creator,
-#               }
-    
-#     return render(request, 'Blog/movies-delete-view.html', context)
+def delete_post(request, pk):
+    instance = get_object_or_404(Listing, pk=pk)
+    instance.delete()
+    return HttpResponseRedirect(reverse('profile'))
