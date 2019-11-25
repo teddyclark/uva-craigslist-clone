@@ -97,7 +97,7 @@ class Listing(models.Model):
 
     sold = models.BooleanField(default=False)
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
 
     #cover = Image.open(image)

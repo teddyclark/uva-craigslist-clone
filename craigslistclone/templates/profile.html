@@ -126,8 +126,16 @@
                             <p style="font-weight:bold">Condition: {{ listing.get_condition_display }}</p> 
                             <p style="word-break: break-all;">{{ listing.description }}</p>
 
+
+                            <form action="{% url 'mark_sold' listing.id %}" method="post">
+                                {% csrf_token %}
+                                    <button type="submit" class="btn btn-outline-info btn-sm" style="margin-top: 10px; margin-left: 85px;">Mark Listing Sold</button>
+                            </form>
                             
-                            <button><a href="{% url 'delete_post' %}">Remove Listing</a></button>
+                            <form action="{% url 'delete_post' listing.id %}" method="post">
+                                {% csrf_token %}
+                                    <button type="submit" class="btn btn-outline-danger btn-sm" style="margin-bottom: 15px; margin-left: 85px;">Delete this Listing</button>
+                            </form>
 
                         </div>
                     {% endfor %}
