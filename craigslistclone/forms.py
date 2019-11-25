@@ -44,7 +44,7 @@ class ListingForm(forms.ModelForm):
             )),
         required=True,
     )
-    '''
+    
     place = forms.CharField(
         label='Meeting Location',
         widget=forms.Select(attrs={'class': 'form-control'},
@@ -57,7 +57,7 @@ class ListingForm(forms.ModelForm):
             )),
         required=True,
     )
-    '''
+    
     class Meta:
         model = Listing
-        fields = ['title', 'price', 'description', 'image', 'condition', 'category']
+        fields = ['title', 'price', 'description', 'image', 'condition', 'category', 'place']

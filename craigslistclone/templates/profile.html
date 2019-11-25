@@ -27,7 +27,7 @@
                 <a class="nav-link" href="{% url 'home' %}" style="color:white">Home</a>
                 <a class="nav-link" href="{% url 'createListing' %}" style="color:white">Create New Listing</a>
                 <a class="nav-link" href="{% url 'listings' %}" style="color:white">Listings</a>
-                <a class="nav-link " href="{% url 'profile' %}" style="color:white">Profile</a>                
+                <a class="nav-link " href="{% url 'profile' %}" style="color:#5FBEC1">Profile</a>                
                 <a class="nav-link" href="{% url 'logout' %}" style="color:white">Logout</a>
             </nav>
         </div>
@@ -64,7 +64,7 @@
         <div class= "lists">
             <h1 style="text-align: center; font-size:32px;">My Listings</h1>
                 {% if latest_post_list %}
-                <div class="row">
+                <div class="row" style="margin-right: 10%; margin-left: 10%">
                     {% for listing in latest_post_list %}
                     
                     <!--
@@ -81,6 +81,7 @@
                             box-shadow: 0px 2px 20px 1px rgba(0, 0, 0, 0.2);
                             padding-left: 50px;
                             padding-right: 50px;
+                            padding-top: 50px;
                             justify-content:center;
                             width: 400px;
                             margin:25px auto">
@@ -88,16 +89,6 @@
                             <img src="{{ listing.image.url }}" style="height:300px; width:300px" alt="{{ listing.name }}">
                             <h3> ${{ listing.price }} </h3>
 
-    
-                            <div id="myModal" class="modal">
-                                <!-- Modal content -->
-                                <div class="modal-content">
-                                    <span class="close">&times;</span>
-                                    <h2> {{ listing.name }} -  ${{ listing.price }} </h2>
-                                    <h5> {{ listing.condition }}, {{ listing.category }} </h5>
-                                    <p>{{ listing.description }}</p>
-                                </div>    
-                            </div>
                             <p style="font-weight:bold; margin:0px; padding:0px;">Category: {{ listing.get_category_display }}</p>
                             <p style="font-weight:bold">Condition: {{ listing.get_condition_display }}</p> 
                             <p style="word-break: break-all;">{{ listing.description }}</p>

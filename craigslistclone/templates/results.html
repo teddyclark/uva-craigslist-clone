@@ -27,7 +27,7 @@
               <nav class="nav nav-masthead justify-content-center">
                 <a class="nav-link" href="{% url 'home' %}" style="color:white">Home</a>
                 <a class="nav-link" href="{% url 'createListing' %}" style="color:white">Create New Listing</a>
-                <a class="nav-link" href="{% url 'listings' %}" style="color:white">Listings</a>
+                <a class="nav-link" href="{% url 'listings' %}" style="color:#5FBEC1">Listings</a>
                 <a class="nav-link" href="{% url 'profile' %}" style="color:white">Profile</a>                
                 <a class="nav-link" href="{% url 'logout' %}" style="color:white">Logout</a>
               </nav>
@@ -37,8 +37,9 @@
     <div class="container" style="margin-top:100px">
         <h1 style="font-size:32px; text-align:center;">Search Results</h1>
         <br>
+        <!--
         <div class='category-filter'>
-            <!--<span>Categories:</span> -->
+            <!--<span>Categories:</span>
             <form method="GET" align="center">
                 <input type="submit" class="btn" value="All" name="cat" style="color: #5FBEC1; background-color: #343A40;">
                 <input type="submit" class="btn" value="Textbook" name="cat" style="color:#5FBEC1; background-color: #343A40;">
@@ -48,6 +49,9 @@
                 <input type="submit" class="btn" value="Other" name="cat" style="color:#5FBEC1; background-color: #343A40;">
             </form>                                       
         </div>
+        -->
+
+        <button style="background-color: #5FBEC1; margin-left:41%;"><a class="nav-link" href="{% url 'listings' %}" style="color: #FFFFFF;">Go back to List Page </a></button>
 
         <div class="searchBar">
                 <form class="navbar-form navbar-left" role="search" action="{% url 'search' %}">
