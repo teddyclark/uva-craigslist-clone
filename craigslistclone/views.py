@@ -1,12 +1,10 @@
 from django.urls import reverse_lazy
-# from .utils import is_login
 from .forms import ListingForm
 from django.views.generic import CreateView
 from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.db.models import Q
-# from django.contrib import messages
 from.models import Listing, GoogleUserList
 from django.views import generic
 from django.contrib.auth import logout as auth_logout
@@ -27,12 +25,19 @@ class Profile(generic.ListView):
     login_url = '/'
     template_name = 'profile.html'
     model = Listing
-    context_object_name = 'latest_post_list'
+    # context_object_name = 'latest_post_list'
 
-    def get_queryset(self):
+    # def get_queryset(self):
+    #     user = CustomUser.objects.get(username=self.request.user.username)
+    #     print("Username: ", user)
+    #     return Listing.objects.filter(associated_username=user)
+    
+    def get_context_data(self, **kwargs):
         user = CustomUser.objects.get(username=self.request.user.username)
-        print("Username: ", user)
-        return Listing.objects.all().filter(associated_username=user)
+        obj = super(Profile, self).get_context_data(**kwargs)
+        obj['active_listings'] = Listing.objects.filter(sold=False, associated_username=user)
+        obj['inactive_listings'] = Listing.objects.filter(sold=True, associated_username=user)
+        return obj
 
 
 
