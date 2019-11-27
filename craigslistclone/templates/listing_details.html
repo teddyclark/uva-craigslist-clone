@@ -46,6 +46,7 @@
     </section>
 
 
+    <!-- Javascript to handle map generation and coordinates -->
     <script type="text/javascript">
         var map;
         var latitude1 = "{{ listing.latitude }}";
@@ -65,7 +66,7 @@
                 position: myLatlng, 
                 map: map,
             });
-            google.maps.event.addListener(marker, 'dragend', function (event) {
+            google.maps.event.addListener(marker, 'dragend', function(event) {
                 document.getElementById("lat").value = this.getPosition().lat();
                 document.getElementById("lng").value = this.getPosition().lng();
             }); 

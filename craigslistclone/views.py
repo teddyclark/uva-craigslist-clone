@@ -22,11 +22,7 @@ def home(request):
     else:
         return render(request, 'login.html')
 
-#def profile(request):
-#    if request.user.is_authenticated:
-#        return render(request, 'profile.html')
-#    else:
-#        return render(request, 'login.html')
+
 class Profile(generic.ListView):
     login_url = '/'
     template_name = 'profile.html'
@@ -99,20 +95,20 @@ class ListingView(generic.ListView):
         switcher = {
             "All": "All",
             "Textbook": "TB",
-            "Furniture": "FN",
+            "Furniture": "FN", 
             "Clothes": "CL",
             "Electronics": "EL",
             "Other": "OT",   
         }
         category = switcher.get(categorystring, "trolol")
         if querystring:
-            return Listing.objects.filter(Q(title__icontains=querystring) | Q(description__icontains=querystring))
+            return Listing.objects.filter(Q(sold=False) & (Q(title__icontains=querystring) | Q(description__icontains=querystring)))
         if category:
             if category == "All":
-                return Listing.objects.all()
-            return Listing.objects.filter(Q(category__icontains=category))
+                return Listing.objects.filter(sold=False)
+            return Listing.objects.filter(Q(sold=False) & Q(category__icontains=category))
         else:
-            return Listing.objects.all()
+            return Listing.objects.filter(sold=False)
 
 
 def search(request):
@@ -121,7 +117,7 @@ def search(request):
         if len(querystring) == 0:
             return redirect('/search/')
 
-        results = Listing.objects.filter(Q(title__icontains=querystring) | Q(description__icontains=querystring))
+        results = Listing.objects.filter(Q(sold=False) & (Q(title__icontains=querystring) | Q(description__icontains=querystring)))
         return render(request, 'results.html', {
             'querystring': querystring,
             'results': results,

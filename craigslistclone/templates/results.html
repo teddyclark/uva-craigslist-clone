@@ -37,21 +37,8 @@
     <div class="container" style="margin-top:100px">
         <h1 style="font-size:32px; text-align:center;">Search Results</h1>
         <br>
-        <!--
-        <div class='category-filter'>
-            <!--<span>Categories:</span>
-            <form method="GET" align="center">
-                <input type="submit" class="btn" value="All" name="cat" style="color: #5FBEC1; background-color: #343A40;">
-                <input type="submit" class="btn" value="Textbook" name="cat" style="color:#5FBEC1; background-color: #343A40;">
-                <input type="submit" class="btn" value="Furniture" name="cat" style="color:#5FBEC1; background-color: #343A40;">
-                <input type="submit" class="btn" value="Clothes" name="cat" style="color:#5FBEC1; background-color: #343A40;">
-                <input type="submit" class="btn" value="Electronics" name="cat" style="color:#5FBEC1; background-color: #343A40;">
-                <input type="submit" class="btn" value="Other" name="cat" style="color:#5FBEC1; background-color: #343A40;">
-            </form>                                       
-        </div>
-        -->
 
-        <button style="background-color: #5FBEC1; margin-left:41%;"><a class="nav-link" href="{% url 'listings' %}?cat=All" style="color: #FFFFFF;">Go back to List Page </a></button>
+        <button style="color: #5FBEC1; background-color: #343A40; margin-left:41%;"><a class="nav-link" href="{% url 'listings' %}?cat=All" style="color: #FFFFFF;">Go back to List Page </a></button>
 
         <div class="searchBar">
                 <form class="navbar-form navbar-left" role="search" action="{% url 'search' %}">
@@ -84,17 +71,15 @@
                     <p style="font-weight:bold">Condition: {{ listing.get_condition_display }}</p> 
                     <p>{{ listing.description }}</p>
 
-                    {% if listing.associated_username == user.username %}
-                        <button>Remove this Listing</button>
-                    {% else %}
-                        <p></p>
-                    {% endif %}
-
                 </div>
                 {% endfor %} 
             </div>
             {% else %}
-                <h4 class="no-result">No listings found:(</h4>
+                <h4 style="text-align:center;">.</h4>
+                <h4 style="text-align:center;">.</h4>
+                <h4 style="text-align:center;">.</h4>
+                <h4 style="text-align:center;">.</h4>
+                <h4 class="no-result" style="font-size:25px; text-align:center; margin-top: 30px;">No Results Found</h4>
             {% endif %}
     </div>
 
