@@ -54,12 +54,12 @@
             <div class='category-filter'>
                 <!-- <span>Categories:</span> -->
                 <form method="GET" align="center">
-                    <input type="submit" class="btn" value="All" name="cat" style="color: #5FBEC1; background-color: #343A40;">
-                    <input type="submit" class="btn" value="Textbook" name="cat" style="color: #5FBEC1; background-color: #343A40;">
-                    <input type="submit" class="btn" value="Furniture" name="cat" style="color: #5FBEC1; background-color: #343A40;">
-                    <input type="submit" class="btn" value="Clothes" name="cat" style="color: #5FBEC1; background-color: #343A40;">
-                    <input type="submit" class="btn" value="Electronics" name="cat" style="color: #5FBEC1; background-color: #343A40;">
-                    <input type="submit" class="btn" value="Other" name="cat" style="color: #5FBEC1; background-color: #343A40;">
+                    <input type="submit" class="btn" value="All" name="cat" style="color: #FFFFFF; background-color: #5FBEC1;">
+                    <input type="submit" class="btn" value="Textbook" name="cat" style="color: #FFFFFF; background-color: #5FBEC1;">
+                    <input type="submit" class="btn" value="Furniture" name="cat" style="color: #FFFFFF; background-color: #5FBEC1;">
+                    <input type="submit" class="btn" value="Clothes" name="cat" style="color: #FFFFFF; background-color: #5FBEC1;">
+                    <input type="submit" class="btn" value="Electronics" name="cat" style="color: #FFFFFF; background-color: #5FBEC1;">
+                    <input type="submit" class="btn" value="Other" name="cat" style="color: #FFFFFF; background-color: #5FBEC1;">
                 </form>                                       
             </div>
             <div class="searchBar">
@@ -93,7 +93,7 @@
                         <p style="font-weight:bold; margin:0px; padding:0px;">Contact Seller: <a href="mailto:{{ listing.associated_username }}@virginia.edu">{{ listing.associated_username }}</a></p>
                         <p style="font-weight:bold; margin:0px; padding:0px;">Category: {{ listing.get_category_display }}</p>
                         <p style="font-weight:bold">Condition: {{ listing.get_condition_display }}</p> 
-                        <p>{{ listing.description }}</p>
+                        <p style="word-break: break-all;">{{ listing.description }}</p>
 
                         <p style="font-weight:bold">Meeting Location:</p>
 
@@ -104,7 +104,7 @@
                 {% endfor %} 
             </div>
         {% else %}
-            <p style="text-align: center">Click a category to get started.</p>
+            <p style="text-align: center">No post has been made for this category yet.</p>
         {% endif %}
         </div>
 </div>
@@ -130,11 +130,3 @@
 </footer> -->
 
 </html>
-
-
-
-
-<!--Citation
-    for the button description
-    https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal
---> 

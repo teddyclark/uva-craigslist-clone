@@ -1,5 +1,4 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link href="/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
@@ -40,6 +39,8 @@
                     </div>
                 </div>
             </div>
+
+            <!--
             <div class="row">
                 <div class="col-md-8 mx-auto">
                     <h3 class="text-center font-weight-bold"><span class="bg-main"></span>Guidelines</h3>
@@ -53,7 +54,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
 
@@ -67,10 +68,10 @@
                         <div class="card-block">
                             <h4 class="card-title" style="text-align: center">Clothes</h4>
                         </div>
-                        <!--<div class="card-footer">
+                        <div class="card-footer">
                             <small></small>
-                            <a href="#" class="pull-right">More Info</a>
-                        </div> -->
+                            <a href="{% url 'listings' %}?cat=Clothes" class="pull-right">More Info</a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4 col-lg-4 mt-4">
@@ -79,9 +80,9 @@
                         <div class="card-block">
                             <h4 class="card-title" style="text-align: center">Books</h4>        
                         </div>
-                        <!--<div class="card-footer">
-                            <a href="#" class="pull-right">More Info</a>
-                        </div>-->
+                        <div class="card-footer">
+                            <a href="{% url 'listings' %}?cat=Textbook" class="pull-right">More Info</a>
+                        </div>
                     </div>
                 </div>
 
@@ -91,9 +92,9 @@
                         <div class="card-block">
                             <h4 class="card-title" style="text-align: center">Furniture</h4>
                         </div>
-                        <!--<div class="card-footer">
-                            <a href="#" class="pull-right">More Info</a>
-                        </div> -->
+                        <div class="card-footer">
+                            <a href="{% url 'listings' %}?cat=Furniture" class="pull-right">More Info</a>
+                        </div>
                     </div>
                 </div>
             </div>

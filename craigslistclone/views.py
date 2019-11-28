@@ -132,6 +132,12 @@ def search(request):
         return render(request, 'results.html')
 
 
+def mark_unsold(request, pk):
+    instance = get_object_or_404(Listing, pk=pk)
+    instance.sold = False
+    instance.save()
+    return HttpResponseRedirect(reverse('profile'))
+
 def mark_sold(request, pk):
     instance = get_object_or_404(Listing, pk=pk)
     instance.sold = True

@@ -60,7 +60,15 @@
       >
   
       <h1 style="font-size:32px; text-align:center;">Create a New Listing</h1>
-      <p style="text-align:center">Please ensure you have read the listing guidelines.</p>
+      <p style="text-align: center">Here are some posting guidelines to help you get started</p>
+          <div class="guidelines" style="margin: 0 auto;">
+            <ul style="list-style-type:circle; margin: 0 auto">
+              <li>Be sure to take a high quality picture of your item</li>
+              <li>Add a detailed description with alternate contact info. We'll provide your student email but feel free to enter another point of contact</li>
+              <li>Pick a category and an accurate condition of your item</li>
+              <li>You're ready to start selling!</li>
+            </ul>
+          </div>
       <form enctype="multipart/form-data" action="{% url 'createListing' %}" id="isting-form" method="post" role="form">
         {% csrf_token %}
         {{ form.status }}
