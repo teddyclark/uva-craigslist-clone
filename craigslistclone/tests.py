@@ -6,17 +6,6 @@ from craigslistclone.models import Listing
 from craigslistclone.views import home
 from users.models import CustomUser
 
-
-# class TestStringMethods(unittest.TestCase):
-#     # temporary tests
-#     def test_1(self):
-#         a = 1
-#         self.assertEqual(1, a)
-#     def test_2(self):
-#         b = 4
-#         a = 1
-#         self.assertFalse(a == b)
-
 class TestUrl(unittest.TestCase):
     # tests root url resolves to home
     def test_root_url_resolves_to_home_view(self):
@@ -63,9 +52,12 @@ class TestListing(unittest.TestCase):
     def test_price(self):
         listing = Listing(title = 'testname', price = 51.12)
         self.assertEqual(listing.price, 51.12)
-    def test_condition(self):
+    def test_bad_condition(self):
         listing = Listing(title = 'testname', price = 51.12, condition = 0)
         self.assertEqual(listing.condition, 0)
+    def test_good_condition(self):
+        listing = Listing(title = 'testname', price = 51.12, condition = 3)
+        self.assertEqual(listing.condition, 3)
     def test_description(self):
         listing = Listing(title = 'testname', price = 51.12, condition = 0, description = 'great product')
         self.assertEqual(listing.description, 'great product')
@@ -75,6 +67,12 @@ class TestListing(unittest.TestCase):
     def test_not_sold(self):
         listing = Listing(title = 'testname', price = 51.12, condition = 0, description = 'great product', sold = False)
         self.assertEqual(listing.sold, False)
+    def test_cateogry_textbook(self):
+        listing = Listing(title = 'testname', price = 51.12, condition = 0, description = 'great product', sold = False, category = 'TB')
+        self.assertEqual(listing.category, 'TB')
+    def test_cateogry_default(self):
+        listing = Listing(title = 'testname', price = 51.12, condition = 0, description = 'great product', sold = False, category = 'OT')
+        self.assertEqual(listing.category, 'OT')
 
 class TestListing_restriction(unittest.TestCase):
     # test name that is too long
@@ -96,18 +94,6 @@ class ViewsTest_login(TestCase):
        response = self.client.get("/")
        self.assertEqual(response.status_code, 200)
 
-# Test listing time
-# class TestListingTime(unittest.TestCase):
-#     def test_upload_time(self):
-#         listing = Listing(created_at = timezone.now())
-#         self.assertIs(listing.created_at, listing.created_at)
-# import unittest
-
-# from django.test import TestCase, Client
-# from django.urls import reverse, resolve
-# from craigslistclone.models import Listing
-# from craigslistclone.views import home
-# from users.models import CustomUser
 
 # class TestStringMethods(unittest.TestCase):
 #     # temporary tests
@@ -118,59 +104,3 @@ class ViewsTest_login(TestCase):
 #         b = 4
 #         a = 1
 #         self.assertFalse(a == b)
-
-# class TestUrl(unittest.TestCase):
-#     # tests root url resolves to home
-#     def test_root_url_resolves_to_home_view(self):
-#         found = resolve('/')
-#         self.assertEqual(found.func, home)
-# class TestUserModel(unittest.TestCase):
-#     def test_usernameTest(self):
-#         user = CustomUser(username = 'tester')
-#         self.assertEqual(user.username, "tester")
-#     def test_first_name(self):
-#         user = CustomUser(first_name = "John")
-#         self.assertEqual(user.first_name, "John")
-#     # exception test
-#     def test_last_name(self):
-#         user = CustomUser(last_name = "Doe")
-#         self.assertFalse(user.last_name == "Day")
-
-# class ViewsTestNoUser(TestCase):
-#     def setUp(self):
-#         self.client = Client()
-#         #testing with no user login
-#     def testLogInPage(self):
-#         response = self.client.get("/")
-#         self.assertEqual(response.status_code, 200)
-#     def testHomePage(self):
-#         response = self.client.get("/home/")
-#         self.assertEqual(response.status_code, 404)
-#     def testProfilePage(self):
-#         response = self.client.get("profile/")
-#         self.assertEqual(response.status_code, 404)
-#     #def testCreatePostPage(self):                  #this is a bug
-#     #    response = self.client.get("/createListing/")
-#     #    self.assertEqual(response.status_code, 404)
-#     #def testListingsPage(self):
-#     #    response = self.client.get("/listings/")
-#     #    self.assertEqual(response.status_code, 404)
-# '''
-# class ViewsTest(TestCase):
-#     def setUp(self):
-#         #user = GoogleUserList(registered_user = "john")
-#         self.client = Client()
-#         #self.client.force_login(user)
-#         self.client.force_login(User.objects.get_or_create(username='testuser')[0])
-#     #def testLogInPage(self):
-#     #    response = self.client.get("/")
-#     #    self.assertEqual(response.status_code, 200)
-# '''
-
-# class TestListing(unittest.TestCase):
-#     def test_listingname(self):
-#         listing = Listing(title = 'testname')
-#         self.assertEqual(listing.title, "testname")
-#     def test_price(self):
-#         listing = Listing(title = 'testname', price = 51.12)
-#         self.assertEqual(listing.price, 51.12)
