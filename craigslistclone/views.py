@@ -21,7 +21,7 @@ def home(request):
         return render(request, 'login.html')
 
 
-class Profile(generic.ListView):
+class Profile(LoginRequiredMixin, generic.ListView):
     login_url = '/'
     template_name = 'profile.html'
     model = Listing
@@ -86,7 +86,7 @@ def createListing(request, template_name="createListing.html"):
         return render(request, 'login.html')
 
 
-class ListingView(generic.ListView):
+class ListingView(LoginRequiredMixin, generic.ListView):
     login_url = '/'
     template_name = 'listings.html'
     model = Listing
