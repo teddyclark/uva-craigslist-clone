@@ -69,7 +69,7 @@
                     <p style="font-weight:bold; margin:0px; padding:0px;">Seller: <a href="mailto:{{ listing.associated_username }}@virginia.edu">{{ listing.associated_username }}</a></p>
                     <p style="font-weight:bold; margin:0px; padding:0px;">Category: {{ listing.get_category_display }}</p>
                     <p style="font-weight:bold">Condition: {{ listing.get_condition_display }}</p> 
-                    <p style="word-break: break-all;">{{ listing.description }}</p>
+                    <p style="word-break: break-word;">{{ listing.description }}</p>
 
                 </div>
                 {% endfor %} 
