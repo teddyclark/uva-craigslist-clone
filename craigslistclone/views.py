@@ -1,18 +1,18 @@
 from django.urls import reverse_lazy
-# from .utils import is_login
 from .forms import ListingForm
 from django.views.generic import CreateView
-from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseForbidden
+from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.db.models import Q
-# from django.contrib import messages
 from.models import Listing, GoogleUserList
 from django.views import generic
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from users.models import CustomUser
+from django.utils import timezone
+from geopy import geocoders
 
 def home(request):
     if request.user.is_authenticated:
@@ -20,43 +20,30 @@ def home(request):
     else:
         return render(request, 'login.html')
 
-#def profile(request):
-#    if request.user.is_authenticated:
-#        return render(request, 'profile.html')
-#    else:
-#        return render(request, 'login.html')
-class Profile(generic.ListView):
+
+class Profile(LoginRequiredMixin, generic.ListView):
     login_url = '/'
     template_name = 'profile.html'
     model = Listing
-    context_object_name = 'latest_post_list'
+    # context_object_name = 'latest_post_list'
 
-    def get_queryset(self):
+    # def get_queryset(self):
+    #     user = CustomUser.objects.get(username=self.request.user.username)
+    #     print("Username: ", user)
+    #     return Listing.objects.filter(associated_username=user)
+    
+    def get_context_data(self, **kwargs):
         user = CustomUser.objects.get(username=self.request.user.username)
-        print("Username: ", user)
-        return Listing.objects.all().filter(associated_username=user)
+        obj = super(Profile, self).get_context_data(**kwargs)
+        obj['active_listings'] = Listing.objects.filter(sold=False, associated_username=user)
+        obj['inactive_listings'] = Listing.objects.filter(sold=True, associated_username=user)
+        return obj
 
 
 
 def logout(request):
     auth_logout(request)
     return redirect('/')
-
-# def createListingPage(request):
-#     if request.user.is_authenticated:
-#         return render(request, 'createListing.html')
-#     else:
-#         return render(request, 'login.html')
-
-# class CreateListing(LoginRequiredMixin, CreateView):
-#    login_url = '/'
-#    template_name = 'createListing.html'
-#    form_class = ListingForm
-#    success_url = reverse_lazy('listings')
-
-#    def form_valid(self, form):
-#        print("form valid")
-#        return super(CreateListing, self).form_valid(form)
 
  
 def createListing(request, template_name="createListing.html"):
@@ -68,16 +55,38 @@ def createListing(request, template_name="createListing.html"):
             if form.is_valid():
                 instance = form.save(commit=False)
                 instance.associated_username = user
+
+                # it is necessary to initialize values for latitude and longitude to avoid potential errors - these point to Rice Hall
+                instance.latitude = 38.031603
+                instance.longitude = -78.510779
+                print("LATITUDE: ", instance.latitude, ", LONGITUDE: ", instance.longitude)
                 print("IMAGE FIELD: ", instance.image)
+
+
+                """ This following code takes in pickup_location from the model,
+                    converts that location into coordinates, and saves it the
+                    appropriate fields in the model
+                """
+
+                addr = instance.pickup_location
+                g = geocoders.GoogleV3(api_key='AIzaSyBZiiJxIQrpxmMopu-UyqmZEYX7np2CKsw')
+                location = g.geocode(addr, timeout=10)
+
+                instance.latitude = location.latitude
+                instance.longitude = location.longitude
+
+                print("LATITUDE: ", instance.latitude, ", LONGITUDE: ", instance.longitude)
+
                 instance.save()
-                return redirect('listings')
+                return redirect('profile')
         else:
             form = ListingForm()
         return render(request, template_name, {'form': form})
     else:
         return render(request, 'login.html')
 
-class ListingView(generic.ListView):
+
+class ListingView(LoginRequiredMixin, generic.ListView):
     login_url = '/'
     template_name = 'listings.html'
     model = Listing
@@ -91,20 +100,21 @@ class ListingView(generic.ListView):
         switcher = {
             "All": "All",
             "Textbook": "TB",
-            "Furniture": "FN",
+            "Furniture": "FN", 
             "Clothes": "CL",
             "Electronics": "EL",
             "Other": "OT",   
         }
         category = switcher.get(categorystring, "trolol")
         if querystring:
-            return Listing.objects.filter(Q(name__icontains=querystring) | Q(description__icontains=querystring))
+            return Listing.objects.filter(Q(sold=False) & (Q(title__icontains=querystring) | Q(description__icontains=querystring)))
         if category:
             if category == "All":
-                return Listing.objects.all()
-            return Listing.objects.filter(Q(category__icontains=category))
+                return Listing.objects.filter(sold=False)
+            return Listing.objects.filter(Q(sold=False) & Q(category__icontains=category))
         else:
-            return Listing.objects.all()
+            return Listing.objects.filter(sold=False)
+
 
 def search(request):
     if 'q' in request.GET:
@@ -112,7 +122,7 @@ def search(request):
         if len(querystring) == 0:
             return redirect('/search/')
 
-        results = Listing.objects.filter(Q(name__icontains=querystring) | Q(description__icontains=querystring))
+        results = Listing.objects.filter(Q(sold=False) & (Q(title__icontains=querystring) | Q(description__icontains=querystring)))
         return render(request, 'results.html', {
             'querystring': querystring,
             'results': results,
@@ -122,44 +132,28 @@ def search(request):
         return render(request, 'results.html')
 
 
-def delete_post(request, id=None):
+def mark_unsold(request, pk):
+    instance = get_object_or_404(Listing, pk=pk)
+    instance.sold = False
+    instance.save()
+    return HttpResponseRedirect(reverse('profile'))
 
-    creator = request.user.username
-    # instance = get_object_or_404(Listing, id=id)
-
-    print("CREATOR: ", creator)
-
-    return render(request, 'delete_post.html')
-
-    # print("INSTANCE: ", instance)
-
-    # if request.method == "POST" and request.user.is_authenticated and request.user.username == creator:
-
-    #     instance.delete()
-
-    #     return render(request, 'delete_post.html')
-
-    # else:
-    #     return render(request, 'createListing.html')
-
-# def delete_post(request):
-#     return render(request, 'delete_post.html')
+def mark_sold(request, pk):
+    instance = get_object_or_404(Listing, pk=pk)
+    instance.sold = True
+    instance.save()
+    return HttpResponseRedirect(reverse('profile'))
 
 
+def delete_post(request, pk):
+    instance = get_object_or_404(Listing, pk=pk)
+    instance.delete()
+    return HttpResponseRedirect(reverse('profile'))
 
-# def movies_delete_view(request, id=None):
 
-#     movie= get_object_or_404(Movie, id=id)
+class DetailView(generic.DetailView):
+    model = Listing
+    template_name = 'listing_details.html'
 
-#     creator= movie.user.username
-
-#     if request.method == "POST" and request.user.is_authenticated and request.user.username == creator:
-#         movie.delete()
-#         messages.success(request, "Post successfully deleted!")
-#         return HttpResponseRedirect("/Blog/list/")
-    
-#     context= {'movie': movie,
-#               'creator': creator,
-#               }
-    
-#     return render(request, 'Blog/movies-delete-view.html', context)
+    def get_queryset(self):
+        return Listing.objects.all()

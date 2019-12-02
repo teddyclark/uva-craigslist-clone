@@ -4,9 +4,9 @@ from django.core.exceptions import ValidationError
 
 
 class ListingForm(forms.ModelForm):
-    name = forms.CharField(
+    title = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control'}),
-        max_length=255,
+        max_length=150,
         required=True)
     description = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'form-control'}),
@@ -24,11 +24,10 @@ class ListingForm(forms.ModelForm):
         widget=forms.Select(
             attrs={'class': 'form-control'},
             choices = (
-                ('0', 'Bad'),
-                ('1', 'Poor'),
+                ('0', 'New'),
+                ('1', 'Good'),
                 ('2', 'Decent'),
-                ('3', 'Good'),
-                ('4', 'New'),
+                ('3', 'Poor'),
             )),
         required=True,
     )
@@ -44,57 +43,26 @@ class ListingForm(forms.ModelForm):
             )),
         required=True,
     )
-    '''
-    place = forms.CharField(
-        label='Meeting Location',
-        widget=forms.Select(attrs={'class': 'form-control'},
-            choices = (
-                ('0', 'Rotunda'),
-                ('1', 'Rice Hall'),
-                ('2', 'O-Hill'),
-                ('3', '1515 on the Corner'),
-                ('4', 'McLeod Hall'),
-            )),
-        required=True,
+
+    pickup_location = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        max_length=150,
+        required=True
     )
-    '''
+    
+    # place = forms.CharField(
+    #     label='Meeting Location',
+    #     widget=forms.Select(attrs={'class': 'form-control'},
+    #         choices = (
+    #             ('0', 'Rotunda'),
+    #             ('1', 'Rice Hall'),
+    #             ('2', 'O-Hill'),
+    #             ('3', '1515 on the Corner'),
+    #             ('4', 'McLeod Hall'),
+    #         )),
+    #     required=True,
+    # )
+    
     class Meta:
         model = Listing
-        #fields = ['name', 'price', 'description', 'image', 'condition', 'category', 'place']
-        fields = ['name', 'price', 'description', 'image', 'condition', 'category']
-
-
-
-# class RegisterForm(forms.ModelForm):
-#     firstName = forms.CharField(
-#         widget=forms.TextInput(attrs={'class': 'form-control'}),
-#         max_length=50,
-#         required=True)
-#     lastName = forms.CharField(
-#         widget=forms.TextInput(attrs={'class': 'form-control'}),
-#         max_length=50,
-#         required=True)
-#     username = forms.CharField(
-#         widget=forms.TextInput(attrs={'class': 'form-control'}),
-#         max_length=50,
-#         required=True)
-#     password = forms.CharField(
-#         widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-#     confirm_password = forms.CharField(
-#         widget=forms.PasswordInput(attrs={'class': 'form-control'}),
-#         label="Confirm your password",
-#         required=True)
-
-#     class Meta:
-#         model = User
-#         fields = ['firstName', 'lastName', 'username',
-#                   'password', 'confirm_password', ]
-
-#     def clean(self):
-#         super(RegisterForm, self).clean()
-#         password = self.cleaned_data.get('password')
-#         confirm_password = self.cleaned_data.get('confirm_password')
-#         if password and password != confirm_password:
-#             self._errors['password'] = self.error_class(
-#                 ['Passwords don\'t match'])
-#         return self.cleaned_data
+        fields = ['title', 'price', 'description', 'image', 'condition', 'category', 'pickup_location']
