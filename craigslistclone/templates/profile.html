@@ -1,7 +1,7 @@
 <html>
 
     <head>
-        <title>Loxodanta</title>
+        <title>Loxodanta | Profile</title>
     </head>
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -26,7 +26,7 @@
             <nav class="nav nav-masthead justify-content-center">
                 <a class="nav-link" href="{% url 'home' %}" style="color:white">Home</a>
                 <a class="nav-link" href="{% url 'createListing' %}" style="color:white">Create New Listing</a>
-                <a class="nav-link" href="{% url 'listings' %}" style="color:white">Listings</a>
+                <a class="nav-link" href="{% url 'listings' %}?cat=All" style="color:white">Listings</a>
                 <a class="nav-link " href="{% url 'profile' %}" style="color:#5FBEC1">Profile</a>                
                 <a class="nav-link" href="{% url 'logout' %}" style="color:white">Logout</a>
             </nav>
@@ -46,9 +46,7 @@
             margin:25px auto;">
             <h1 style="text-align: center; font-size:32px; margin-top:30px; padding-top: 20px;">My Profile</h1>
             <div class="row">
-<!--                 <div class="img" style="padding-top: 5px; padding-bottom: 10px; margin: 0 auto">
-                    <img class="profileImage" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-                </div> -->
+
                 <div class="profileInfo" style = "font-size: 20px; margin-right: 20px;">
                     <label style="font-weight:bold">Username: </label> {{ user.username }} <br>
                     <label style="font-weight:bold">First Name: </label> {{ user.first_name }} <br>
@@ -62,19 +60,13 @@
 
     <section>
         <div class= "lists">
-            <h1 style="text-align: center; font-size:32px;">My Listings</h1>
-                {% if latest_post_list %}
+            <h1 style="text-align: center; font-size: 32px; margin-top: 50px;">Current Listings</h1>
+            <h4 style="text-align: center; font-size: 14px;">Listings you have not marked sold are displayed below:</h4>
+            <h4 style="text-align: center; font-size: 10px; font-style: italic">THESE POSTS ARE PUBLIC AND CAN BE VIEWED BY OTHER USERS</h4>
+                {% if active_listings %}
                 <div class="row" style="margin-right: 10%; margin-left: 10%">
-                    {% for listing in latest_post_list %}
+                    {% for listing in active_listings %}
                     
-                    <!--
-                        <div class = "column">
-                            {% if listing.image %}
-                                <img src="{{ listing.image.url }}" style="height:350; width:350" alt="{{ listing.name }}">
-                            {% endif %}
-                            <h2> {{ listing.name }} -  ${{ listing.price }} </h2>
-                            <button id="myBtn">More Information</button>
-                    -->
                     <div class = "column" style=
                             "background-color:#F5F5F5;
                             border-radius:50px;
@@ -96,9 +88,52 @@
                             
                             <form action="{% url 'mark_sold' listing.id %}" method="post">
                                 {% csrf_token %}
-                                    <button type="submit" class="btn btn-outline-info btn-sm" style="margin-top: 10px; margin-left: 85px;">Mark Listing Sold</button>
+                                    <button type="submit" class="btn btn-outline-info btn-sm" style="margin-top: 10px; margin-left: 85px; margin-bottom: 15px;">Mark Listing Sold</button>
                             </form>
+
+                        </div>
+                    {% endfor %}
+                    
+                </div>
+            {% else %}
+                <p style="text-align: center; margin-top: 20; margin-bottom: 60; font-style: italic">No active listings</p>
+            {% endif %}
+        </div>
+    </section>
+
+
+    <section>
+        <div class= "lists">
+            <h1 style="text-align: center; font-size: 32px; margin-top: 100px;">Listing Archive</h1>
+            <h4 style="text-align: center; font-size: 14px;">Listings you have marked sold are displayed here:</h4>
+            <h4 style="text-align: center; font-size: 10px; font-style: italic">ONLY YOU CAN SEE THESE POSTS</h4>
+                {% if inactive_listings %}
+                <div class="row" style="margin-right: 10%; margin-left: 10%">
+                    {% for listing in inactive_listings %}
+                    
+                    <div class = "column" style=
+                            "background-color:#F5F5F5;
+                            border-radius:50px;
+                            box-shadow: 0px 2px 20px 1px rgba(0, 0, 0, 0.2);
+                            padding-left: 50px;
+                            padding-right: 50px;
+                            padding-top: 50px;
+                            justify-content:center;
+                            width: 400px;
+                            margin:25px auto">
+                            <h2>{{ listing.title }}</h2>
+                            <img src="{{ listing.image.url }}" style="height:300px; width:300px" alt="{{ listing.name }}">
+                            <h3> ${{ listing.price }} </h3>
+
+                            <p style="font-weight:bold; margin:0px; padding:0px;">Category: {{ listing.get_category_display }}</p>
+                            <p style="font-weight:bold">Condition: {{ listing.get_condition_display }}</p> 
+                            <p style="word-break: break-all;">{{ listing.description }}</p>
                             
+                            <form action="{% url 'mark_unsold' listing.id %}" method="post">
+                                {% csrf_token %}
+                                    <button type="submit" class="btn btn-outline-info btn-sm" style="margin-bottom: 5px; margin-left: 85px;">Re-publish Listing</button>
+                            </form>
+
                             <form action="{% url 'delete_post' listing.id %}" method="post">
                                 {% csrf_token %}
                                     <button type="submit" class="btn btn-outline-danger btn-sm" style="margin-bottom: 15px; margin-left: 85px;">Delete this Listing</button>
@@ -109,7 +144,7 @@
                     
                 </div>
             {% else %}
-                <p style="text-align: center">You have not made any posts yet</p>
+            <p style="text-align: center; margin-top: 20; margin-bottom: 60; font-style: italic">No inactive listings</p>
             {% endif %}
         </div>
     </section>

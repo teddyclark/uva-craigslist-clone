@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^search/$', views.search, name='search'),
     path('<int:pk>/delete_post/', views.delete_post, name='delete_post'),
     path('<int:pk>/mark_sold/', views.mark_sold, name='mark_sold'),
+    path('<int:pk>/mark_unsold/', views.mark_unsold, name='mark_unsold'),
     path('<int:pk>/', views.DetailView.as_view(), name='listing_details'),
 ]
 

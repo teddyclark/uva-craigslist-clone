@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 class ListingForm(forms.ModelForm):
     title = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control'}),
-        max_length=255,
+        max_length=150,
         required=True)
     description = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'form-control'}),
@@ -24,11 +24,10 @@ class ListingForm(forms.ModelForm):
         widget=forms.Select(
             attrs={'class': 'form-control'},
             choices = (
-                ('0', 'Bad'),
-                ('1', 'Poor'),
+                ('0', 'New'),
+                ('1', 'Good'),
                 ('2', 'Decent'),
-                ('3', 'Good'),
-                ('4', 'New'),
+                ('3', 'Poor'),
             )),
         required=True,
     )
@@ -47,7 +46,7 @@ class ListingForm(forms.ModelForm):
 
     pickup_location = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control'}),
-        max_length=255,
+        max_length=150,
         required=True
     )
     

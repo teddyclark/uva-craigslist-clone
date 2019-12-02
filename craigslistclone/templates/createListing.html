@@ -3,7 +3,7 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <head>
-  <title>Loxodanta</title>
+  <title>Loxodanta | Create Listing</title>
 </head>
 
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -26,7 +26,7 @@
       <nav class="nav nav-masthead justify-content-center">
         <a class="nav-link" href="{% url 'home' %}" style="color:white">Home</a>
         <a class="nav-link" href="{% url 'createListing' %}" style="color:#5FBEC1">Create New Listing</a>
-        <a class="nav-link" href="{% url 'listings' %}" style="color:white">Listings</a>
+        <a class="nav-link" href="{% url 'listings' %}?cat=All" style="color:white">Listings</a>
         <a class="nav-link" href="{% url 'profile' %}" style="color:white">Profile</a>                
         <a class="nav-link" href="{% url 'logout' %}" style="color:white">Logout</a>
       </nav>
@@ -60,7 +60,15 @@
       >
   
       <h1 style="font-size:32px; text-align:center;">Create a New Listing</h1>
-      <p style="text-align:center">Please ensure you have read the listing guidelines.</p>
+      <p style="text-align: center">Here are some posting guidelines to help you get started</p>
+          <div class="guidelines" style="margin: 0 auto;">
+            <ul style="list-style-type:circle; margin: 0 auto">
+              <li>Be sure to take a high quality picture of your item</li>
+              <li>Add a detailed description with alternate contact info. We'll provide your student email but feel free to enter another point of contact</li>
+              <li>Pick a category and an accurate condition of your item</li>
+              <li>You're ready to start selling!</li>
+            </ul>
+          </div>
       <form enctype="multipart/form-data" action="{% url 'createListing' %}" id="isting-form" method="post" role="form">
         {% csrf_token %}
         {{ form.status }}

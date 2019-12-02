@@ -3,7 +3,7 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <head>
-    <title>Loxodanta</title>
+    <title>Loxodanta | Login</title>
 </head>
 
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -17,7 +17,7 @@
                 <img src="/media/image_folder/logo subtitle.png" width="300" height="120" alt=""> </a>
             </h3>
             <nav class="nav nav-masthead justify-content-center">
-                <li class="nav-item"><a class="nav-link" href="{% url 'social:begin' 'google-oauth2' %}"style="color:white">Login with Netbadge</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="{% url 'social:begin' 'google-oauth2' %}"style="color:white">Login with Netbadge</a></li> -->
             </nav>
         </div>
     </header>
@@ -26,18 +26,28 @@
     <section class="testimonials" id="gobottom">
             <div class="container">
                 <div class="row"  style="padding-top: 50px; padding-bottom: 50px">
-                    <div class="col-md-4 mb-3" >
+                    <!-- <div class="col-md-4 mb-3" >
                         <div class="big-img">
                             <img style="box-shadow: 0px 2px 20px 1px rgba(34, 30, 30, 0.2); border-radius:5px" src="https://media1.giphy.com/media/w6BAklL8VSbFPcTUWw/giphy.gif" class="img-fluid">
                         </div>
-                    </div>
-                    <div class="col-md-8">
+                    </div> -->
+                    <div class="text-center">
                         <div class="inner-section">
-                            <h3>Loxodonta<span class="bg-main"></span></h3>
+                                <div style="padding-top: 20px; padding-bottom: 20px;">
+                                        <a href="{% url 'social:begin' 'google-oauth2' %}">
+                                            <button class="btn btn-lg" style="color: #5FBEC1; background-color: #343A40;">Login with Netbadge</button>
+                                        </a>
+                                    </div>
+                            <!-- <h3>Loxodonta<span class="bg-main"></span></h3> -->
                             <br>
-                            <p class="text-justify">Say Goodbye to Craigslist and Hello to the new online marketplace, Loxodonta. This is a marketplace for students at the University of Virginia to buy and sell all sorts of items from clothes to textbooks to furniture. Click "Create New Listing" to sell an item or "Listings" to start browsing!</p>
-                            <p style="font-weight: bold">You must authenticate with Netbadge to use this site.</p>
+                            <p class="text-center">Say Goodbye to Craigslist and Hello to the new online marketplace, Loxodonta. This is a marketplace for students at the University of Virginia to buy and sell all sorts of items from clothes to textbooks to furniture. Click "Create New Listing" to sell an item or "Listings" to start browsing!</p>
+                            <p class="font-italic">You must authenticate with Netbadge to use this site.</p>
                         </div>
+                        <!-- <div>
+                            <a href="{% url 'social:begin' 'google-oauth2' %}">
+                                <button class="btn" style="color: #5FBEC1; background-color: #343A40;">Login</button>
+                            </a>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -47,7 +57,7 @@
                 <div class="container" style="padding-top: 25px; padding-bottom: 50px">
                     <div class="row">
                         <div class="col-md-8 mx-auto">
-                            <h3 class="text-center font-weight-bold">Who Are We?<span class="bg-main"></span> </h3>
+                            <h3 class="text-center font-weight-bold">About Us<span class="bg-main"></span> </h3>
                         </div>
                     </div>
                     <div class="row">

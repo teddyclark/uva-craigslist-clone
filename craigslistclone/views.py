@@ -1,12 +1,10 @@
 from django.urls import reverse_lazy
-# from .utils import is_login
 from .forms import ListingForm
 from django.views.generic import CreateView
 from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.db.models import Q
-# from django.contrib import messages
 from.models import Listing, GoogleUserList
 from django.views import generic
 from django.contrib.auth import logout as auth_logout
@@ -22,21 +20,24 @@ def home(request):
     else:
         return render(request, 'login.html')
 
-#def profile(request):
-#    if request.user.is_authenticated:
-#        return render(request, 'profile.html')
-#    else:
-#        return render(request, 'login.html')
-class Profile(generic.ListView):
+
+class Profile(LoginRequiredMixin, generic.ListView):
     login_url = '/'
     template_name = 'profile.html'
     model = Listing
-    context_object_name = 'latest_post_list'
+    # context_object_name = 'latest_post_list'
 
-    def get_queryset(self):
+    # def get_queryset(self):
+    #     user = CustomUser.objects.get(username=self.request.user.username)
+    #     print("Username: ", user)
+    #     return Listing.objects.filter(associated_username=user)
+    
+    def get_context_data(self, **kwargs):
         user = CustomUser.objects.get(username=self.request.user.username)
-        print("Username: ", user)
-        return Listing.objects.all().filter(associated_username=user)
+        obj = super(Profile, self).get_context_data(**kwargs)
+        obj['active_listings'] = Listing.objects.filter(sold=False, associated_username=user)
+        obj['inactive_listings'] = Listing.objects.filter(sold=True, associated_username=user)
+        return obj
 
 
 
@@ -85,7 +86,7 @@ def createListing(request, template_name="createListing.html"):
         return render(request, 'login.html')
 
 
-class ListingView(generic.ListView):
+class ListingView(LoginRequiredMixin, generic.ListView):
     login_url = '/'
     template_name = 'listings.html'
     model = Listing
@@ -99,20 +100,20 @@ class ListingView(generic.ListView):
         switcher = {
             "All": "All",
             "Textbook": "TB",
-            "Furniture": "FN",
+            "Furniture": "FN", 
             "Clothes": "CL",
             "Electronics": "EL",
             "Other": "OT",   
         }
         category = switcher.get(categorystring, "trolol")
         if querystring:
-            return Listing.objects.filter(Q(title__icontains=querystring) | Q(description__icontains=querystring))
+            return Listing.objects.filter(Q(sold=False) & (Q(title__icontains=querystring) | Q(description__icontains=querystring)))
         if category:
             if category == "All":
-                return Listing.objects.all()
-            return Listing.objects.filter(Q(category__icontains=category))
+                return Listing.objects.filter(sold=False)
+            return Listing.objects.filter(Q(sold=False) & Q(category__icontains=category))
         else:
-            return Listing.objects.all()
+            return Listing.objects.filter(sold=False)
 
 
 def search(request):
@@ -121,7 +122,7 @@ def search(request):
         if len(querystring) == 0:
             return redirect('/search/')
 
-        results = Listing.objects.filter(Q(title__icontains=querystring) | Q(description__icontains=querystring))
+        results = Listing.objects.filter(Q(sold=False) & (Q(title__icontains=querystring) | Q(description__icontains=querystring)))
         return render(request, 'results.html', {
             'querystring': querystring,
             'results': results,
@@ -130,6 +131,12 @@ def search(request):
     else:
         return render(request, 'results.html')
 
+
+def mark_unsold(request, pk):
+    instance = get_object_or_404(Listing, pk=pk)
+    instance.sold = False
+    instance.save()
+    return HttpResponseRedirect(reverse('profile'))
 
 def mark_sold(request, pk):
     instance = get_object_or_404(Listing, pk=pk)

@@ -1,6 +1,6 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZiiJxIQrpxmMopu-UyqmZEYX7np2CKsw&callback=initMap" type="text/javascript"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" type="text/javascript"></script>
 <!-- AIzaSyBZiiJxIQrpxmMopu-UyqmZEYX7np2CKsw -->
 <!------ Include the above in your HEAD tag ---------->
 
@@ -29,7 +29,7 @@
               <nav class="nav nav-masthead justify-content-center">
                 <a class="nav-link" href="{% url 'home' %}" style="color:white">Home</a>
                 <a class="nav-link" href="{% url 'createListing' %}" style="color:white">Create New Listing</a>
-                <a class="nav-link" href="{% url 'listings' %}" style="color:white">Listings</a>
+                <a class="nav-link" href="{% url 'listings' %}?cat=All" style="color:white">Listings</a>
                 <a class="nav-link" href="{% url 'profile' %}" style="color:white">Profile</a>                
                 <a class="nav-link" href="{% url 'logout' %}" style="color:white">Logout</a>
               </nav>
@@ -46,6 +46,7 @@
     </section>
 
 
+    <!-- Javascript to handle map generation and coordinates -->
     <script type="text/javascript">
         var map;
         var latitude1 = "{{ listing.latitude }}";
@@ -65,7 +66,7 @@
                 position: myLatlng, 
                 map: map,
             });
-            google.maps.event.addListener(marker, 'dragend', function (event) {
+            google.maps.event.addListener(marker, 'dragend', function(event) {
                 document.getElementById("lat").value = this.getPosition().lat();
                 document.getElementById("lng").value = this.getPosition().lng();
             }); 
