@@ -5,7 +5,7 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <head>
-  <title>Loxodanta | Map</title>
+  <title>Loxodanta | Details</title>
 </head>
 
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -36,7 +36,60 @@
             </div>
     </header>
 
-    <section>
+
+    <section class="testimonials" id="gobottom">
+        <div class="container">
+            <div class="row"  style="padding-top: 50px; padding-bottom: 50px">
+                <div class="col-md-4 mb-3" >
+                    <!-- <div class="big-img">
+                        <img style="box-shadow: 0px 2px 20px 1px rgba(34, 30, 30, 0.2); border-radius:5px" src="https://media1.giphy.com/media/w6BAklL8VSbFPcTUWw/giphy.gif" class="img-fluid">
+                    </div> -->
+                    <h3 style="margin-bottom: 65px; font-size: 30px;">Item Details:</h3>
+                    <div class="row">
+                            <div class="column" style="
+                            background-color:#F5F5F5;
+                            border-radius:30px;
+                            box-shadow: 0px 2px 20px 1px rgba(0, 0, 0, 0.2);
+                            padding-left: 50px;
+                            padding-right: 50px;
+                            padding-top: 50px;
+                            justify-content:center;
+                            width: 400px;
+                            margin:15px auto;">
+
+                                <h2>{{ listing.title }}</h2>
+                                <img src="{{ listing.image.url }}" style="height:300px; width:300px" alt="{{ listing.name }}">
+                                <h3> ${{ listing.price }} </h3>
+        
+                                <p style="font-weight:bold; font-size: 18px; margin-bottom:5px; padding:0px;">Contact Seller: <a href="mailto:{{ listing.associated_username }}@virginia.edu">{{ listing.associated_username }}</a></p>
+                                <p style="font-weight:bold; margin:0px; padding:0px;">Category: {{ listing.get_category_display }}</p>
+                                <p style="font-weight:bold">Condition: {{ listing.get_condition_display }}</p> 
+                                <p style="word-break: break-word;">{{ listing.description }}</p>
+
+                                </p>  
+                            </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="inner-section">
+                        <h3 style="font-size: 30px; padding-left: 68px;">Pickup Location<span class="bg-main"></span></h3>
+                        <h4 style="font-size:18px; font-style: italic; margin-bottom: 25px; padding-left: 68px;">Map pin indicates the location where the seller can meet for item pickup<span class="bg-main"></span></h4>
+                        <br>
+                        <div class="map">
+                            <div class="container" style="margin-bottom: 50px; margin-left: 50px;">
+                                <div class="col-sm-offset-1" id="map_canvas" style="width:800; height:700;"></div>
+                            </div>
+                        </div>
+                        <!-- <p class="text-justify">Say Goodbye to Craigslist and Hello to the new online marketplace, Loxodonta. This is a marketplace for students at the University of Virginia to buy and sell all sorts of items from clothes to textbooks to furniture. Click "Create New Listing" to sell an item or "Listings" to start browsing!</p>
+                        <p style="font-weight: bold">You must authenticate with Netbadge to use this site.</p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- <section>
         <h2 style="font-size:32px; text-align:center; padding-top: 50px">Item Pickup Location:</h2>
         <h4 style="text-align:center; font-size:18px; font-style: italic; margin-bottom: 50px;">Map pin indicates the location where the seller can meet for item pickup:</h4>
         <div class="map">
@@ -44,7 +97,7 @@
                 <div class="col-sm-offset-1" id="map_canvas" style="width:1100; height:700;"></div>
             </div>
         </div>
-    </section>
+    </section> -->
 
 
     <!-- Javascript to handle map generation and coordinates -->
