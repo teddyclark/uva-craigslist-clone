@@ -60,8 +60,9 @@
 
     <section>
         <div class= "lists">
-            <h1 style="text-align: center; font-size: 32px; margin-top: 50px;">Active Listings</h1>
+            <h1 style="text-align: center; font-size: 32px; margin-top: 50px;">Current Listings</h1>
             <h4 style="text-align: center; font-size: 14px;">Listings you have not marked sold are displayed below:</h4>
+            <h4 style="text-align: center; font-size: 10px; font-style: italic">THESE POSTS ARE PUBLIC AND CAN BE VIEWED BY OTHER USERS</h4>
                 {% if active_listings %}
                 <div class="row" style="margin-right: 10%; margin-left: 10%">
                     {% for listing in active_listings %}
@@ -87,13 +88,8 @@
                             
                             <form action="{% url 'mark_sold' listing.id %}" method="post">
                                 {% csrf_token %}
-                                    <button type="submit" class="btn btn-outline-info btn-sm" style="margin-top: 10px; margin-left: 85px;">Mark Listing Sold</button>
+                                    <button type="submit" class="btn btn-outline-info btn-sm" style="margin-top: 10px; margin-left: 85px; margin-bottom: 15px;">Mark Listing Sold</button>
                             </form>
-                            
-                            <!-- <form action="{% url 'delete_post' listing.id %}" method="post">
-                                {% csrf_token %}
-                                    <button type="submit" class="btn btn-outline-danger btn-sm" style="margin-bottom: 15px; margin-left: 85px;">Delete this Listing</button>
-                            </form> -->
 
                         </div>
                     {% endfor %}
@@ -108,8 +104,9 @@
 
     <section>
         <div class= "lists">
-            <h1 style="text-align: center; font-size: 32px; margin-top: 50px;">Inactive Listings</h1>
+            <h1 style="text-align: center; font-size: 32px; margin-top: 100px;">Listing Archive</h1>
             <h4 style="text-align: center; font-size: 14px;">Listings you have marked sold are displayed here:</h4>
+            <h4 style="text-align: center; font-size: 10px; font-style: italic">ONLY YOU CAN SEE THESE POSTS</h4>
                 {% if inactive_listings %}
                 <div class="row" style="margin-right: 10%; margin-left: 10%">
                     {% for listing in inactive_listings %}
@@ -131,16 +128,10 @@
                             <p style="font-weight:bold; margin:0px; padding:0px;">Category: {{ listing.get_category_display }}</p>
                             <p style="font-weight:bold">Condition: {{ listing.get_condition_display }}</p> 
                             <p style="word-break: break-all;">{{ listing.description }}</p>
-
-                            
-                            <!-- <form action="{% url 'mark_sold' listing.id %}" method="post">
-                                {% csrf_token %}
-                                    <button type="submit" class="btn btn-outline-info btn-sm" style="margin-top: 10px; margin-left: 85px;">Mark Listing Sold</button>
-                            </form> -->
                             
                             <form action="{% url 'mark_unsold' listing.id %}" method="post">
                                 {% csrf_token %}
-                                    <button type="submit" class="btn btn-outline-info btn-sm" style="margin-bottom: 15px; margin-left: 85px;">Mark Listing Unsold</button>
+                                    <button type="submit" class="btn btn-outline-info btn-sm" style="margin-bottom: 5px; margin-left: 85px;">Re-publish Listing</button>
                             </form>
 
                             <form action="{% url 'delete_post' listing.id %}" method="post">
