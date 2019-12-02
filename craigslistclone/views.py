@@ -68,14 +68,14 @@ def createListing(request, template_name="createListing.html"):
                     appropriate fields in the model
                 """
 
-                # addr = instance.pickup_location
-                # g = geocoders.GoogleV3(api_key='AIzaSyBZiiJxIQrpxmMopu-UyqmZEYX7np2CKsw')
-                # location = g.geocode(addr, timeout=10)
+                addr = instance.pickup_location
+                g = geocoders.GoogleV3(api_key='AIzaSyBZiiJxIQrpxmMopu-UyqmZEYX7np2CKsw')
+                location = g.geocode(addr, timeout=10)
 
-                # instance.latitude = location.latitude
-                # instance.longitude = location.longitude
+                instance.latitude = location.latitude
+                instance.longitude = location.longitude
 
-                # print("LATITUDE: ", instance.latitude, ", LONGITUDE: ", instance.longitude)
+                print("LATITUDE: ", instance.latitude, ", LONGITUDE: ", instance.longitude)
 
                 instance.save()
                 return redirect('profile')
