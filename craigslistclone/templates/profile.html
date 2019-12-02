@@ -60,7 +60,7 @@
 
     <section>
         <div class= "lists">
-            <h1 style="text-align: center; font-size: 32px; margin-top: 50px;">Current Listings</h1>
+            <h1 style="text-align: center; font-size: 32px; margin-top: 50px;">Your Current Listings</h1>
             <h4 style="text-align: center; font-size: 14px;">Listings you have not marked sold are displayed below:</h4>
             <h4 style="text-align: center; font-size: 10px; font-style: italic">THESE POSTS ARE PUBLIC AND CAN BE VIEWED BY OTHER USERS</h4>
                 {% if active_listings %}
@@ -83,7 +83,7 @@
 
                             <p style="font-weight:bold; margin:0px; padding:0px;">Category: {{ listing.get_category_display }}</p>
                             <p style="font-weight:bold">Condition: {{ listing.get_condition_display }}</p> 
-                            <p style="word-break: break-all;">{{ listing.description }}</p>
+                            <p style="word-break: break-word;">{{ listing.description }}</p>
 
                             
                             <form action="{% url 'mark_sold' listing.id %}" method="post">
@@ -104,7 +104,7 @@
 
     <section>
         <div class= "lists">
-            <h1 style="text-align: center; font-size: 32px; margin-top: 100px;">Listing Archive</h1>
+            <h1 style="text-align: center; font-size: 32px; margin-top: 100px;">Your Listing Archive</h1>
             <h4 style="text-align: center; font-size: 14px;">Listings you have marked sold are displayed here:</h4>
             <h4 style="text-align: center; font-size: 10px; font-style: italic">ONLY YOU CAN SEE THESE POSTS</h4>
                 {% if inactive_listings %}
