@@ -78,7 +78,7 @@ def createListing(request, template_name="createListing.html"):
                 # print("LATITUDE: ", instance.latitude, ", LONGITUDE: ", instance.longitude)
 
                 instance.save()
-                return redirect('listings')
+                return redirect('profile')
         else:
             form = ListingForm()
         return render(request, template_name, {'form': form})

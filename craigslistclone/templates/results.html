@@ -3,7 +3,7 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <head>
-  <title>Loxodanta</title>
+  <title>Loxodanta | Search</title>
 </head>
 
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -38,7 +38,7 @@
         <h1 style="font-size:32px; text-align:center;">Search Results</h1>
         <br>
 
-        <button style="color: #5FBEC1; background-color: #5FBEC1; margin-left:41%;"><a class="nav-link" href="{% url 'listings' %}?cat=All" style="color: #FFFFFF;">Go back to List Page </a></button>
+        <button style="color: #5FBEC1; display: block; border-radius: 5px; background-color: #5FBEC1; margin: auto;"><a class="nav-link" href="{% url 'listings' %}?cat=All" style="color: #FFFFFF;">Return to Listings</a></button>
 
         <div class="searchBar">
                 <form class="navbar-form navbar-left" role="search" action="{% url 'search' %}">
