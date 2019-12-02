@@ -90,14 +90,19 @@
                         <h3> ${{ listing.price }} </h3>
     
     
-                        <p style="font-weight:bold; margin:0px; padding:0px;">Contact Seller: <a href="mailto:{{ listing.associated_username }}@virginia.edu">{{ listing.associated_username }}</a></p>
+                        <!-- <p style="font-weight:bold; margin:0px; padding:0px;">Contact Seller: <a href="mailto:{{ listing.associated_username }}@virginia.edu">{{ listing.associated_username }}</a></p> -->
                         <p style="font-weight:bold; margin:0px; padding:0px;">Category: {{ listing.get_category_display }}</p>
                         <p style="font-weight:bold">Condition: {{ listing.get_condition_display }}</p> 
                         <p style="word-break: break-word;">{{ listing.description }}</p>
+                        <p style="font-weight:bold; margin:0px; padding:0px;">Contact Seller: <a href="mailto:{{ listing.associated_username }}@virginia.edu">{{ listing.associated_username }}</a></p>
 
-                        <p style="font-weight:bold">Meeting Location:</p>
+                        <!-- <a href="{% url 'listing_details' listing.id %}" style="color: #5FBEC1; margin-left: 75px; padding-bottom: 15px;">View Pickup Location</a> -->
 
-                        <a href="{% url 'listing_details' listing.id %}" style="color: #5FBEC1; margin-left: 75px; padding-bottom: 15px;">View Pickup Location</a>
+                        <div style="color: #5FBEC1; margin-left: 70px; padding-bottom: 15px; margin-top: 25px;">
+                            <a href="{% url 'listing_details' listing.id %}">
+                                <button class="btn" style="color: #5FBEC1; background-color: #343A40;">View Pickup Location</button>
+                            </a>
+                        </div>
 
                         </p>  
                     </div>
