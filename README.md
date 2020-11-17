@@ -1,8 +1,5 @@
-# Loxodonta #
-#### Payal Asri, Josh Chang, Priscilla Chung, Teddy Clark, Bryce Cuthriell, Ami Nguyen ####
-Welcome to our UVA Craigslist application, Loxodonta!
-This document will first walk through how we envision the app being used, and then will discuss any particular things that we request to be looked at specifically for grading. 
-
+# UVA Craigslist Clone # 
+This was a group project at UVA for CS3240 - Advanced Software Development. 
 To start, here is the link to the app, deployed on Heroku: https://loxodante.herokuapp.com
 
 ## Login and Home ##
@@ -37,8 +34,3 @@ The next section is a user's "Active Posts". This is the set of all posts that a
 
 
 This covers all the basic functionalities of the site.
-
-
-NOTES FOR GRADING:
-
-1. In order to avoid being charged for usage of the Google Maps API key, we capped off the number of requests per day to 500. If this is for any reason an issue, it can be changed for grading purposes. Note also that the code uses the key twice - once for geocoding whenever a post is made, and whenever a listing details page is visited to render the map.
